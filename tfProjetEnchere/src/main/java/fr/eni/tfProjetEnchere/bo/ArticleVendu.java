@@ -1,18 +1,18 @@
 package fr.eni.tfProjetEnchere.bo;
 
-import java.security.Timestamp;
+import java.time.LocalDate;
 import java.util.List;
 
 public class ArticleVendu {
 	private int noArticle;
 	private String nomArticle;
 	private String description;
-	private Timestamp debutEnchere;
-	private Timestamp finEnchere;
+	private LocalDate debutEnchere;
+	private LocalDate finEnchere;
 	private int misAPrix;
 	private int prixVente;
 	private String etatVente;
-	private Utilisateur utilisateur;
+	private Utilisateur vendeur;
 	private List<Enchere> enchere;
 	private Categorie categorie;
 	private Retrait retrait;
@@ -21,8 +21,8 @@ public class ArticleVendu {
 		super();
 	}
 
-	public ArticleVendu(int noArticle, String nomArticle, String description, Timestamp debutEnchere,
-			Timestamp finEnchere, int misAPrix, int prixVente, String etatVente, Utilisateur utilisateur,
+	public ArticleVendu(int noArticle, String nomArticle, String description, LocalDate debutEnchere,
+			LocalDate finEnchere, int misAPrix, int prixVente, String etatVente, Utilisateur utilisateur,
 			List<Enchere> enchere, Categorie categorie, Retrait retrait) {
 		super();
 		this.noArticle = noArticle;
@@ -33,14 +33,14 @@ public class ArticleVendu {
 		this.misAPrix = misAPrix;
 		this.prixVente = prixVente;
 		this.etatVente = etatVente;
-		this.utilisateur = utilisateur;
+		this.vendeur = utilisateur;
 		this.enchere = enchere;
 		this.categorie = categorie;
 		this.retrait = retrait;
 	}
 
-	public ArticleVendu(int noArticle, String nomArticle, String description, Timestamp debutEnchere,
-			Timestamp finEnchere, int misAPrix, int prixVente, String etatVente) {
+	public ArticleVendu(int noArticle, String nomArticle, String description, LocalDate debutEnchere,
+			LocalDate finEnchere, int misAPrix, int prixVente, String etatVente) {
 		super();
 		this.noArticle = noArticle;
 		this.nomArticle = nomArticle;
@@ -76,19 +76,19 @@ public class ArticleVendu {
 		this.description = description;
 	}
 
-	public Timestamp getDebutEnchere() {
+	public LocalDate getDebutEnchere() {
 		return debutEnchere;
 	}
 
-	public void setDebutEnchere(Timestamp debutEnchere) {
+	public void setDebutEnchere(LocalDate debutEnchere) {
 		this.debutEnchere = debutEnchere;
 	}
 
-	public Timestamp getFinEnchere() {
+	public LocalDate getFinEnchere() {
 		return finEnchere;
 	}
 
-	public void setFinEnchere(Timestamp finEnchere) {
+	public void setFinEnchere(LocalDate finEnchere) {
 		this.finEnchere = finEnchere;
 	}
 
@@ -116,12 +116,12 @@ public class ArticleVendu {
 		this.etatVente = etatVente;
 	}
 
-	public Utilisateur getUtilisateur() {
-		return utilisateur;
+	public Utilisateur getVendeur() {
+		return vendeur;
 	}
 
-	public void setUtilisateur(Utilisateur utilisateur) {
-		this.utilisateur = utilisateur;
+	public void setVendeur(Utilisateur vendeur) {
+		this.vendeur = vendeur;
 	}
 
 	public List<Enchere> getEnchere() {
@@ -152,7 +152,7 @@ public class ArticleVendu {
 	public String toString() {
 		return "ArticleVendu [noArticle=" + noArticle + ", nomArticle=" + nomArticle + ", description=" + description
 				+ ", debutEnchere=" + debutEnchere + ", finEnchere=" + finEnchere + ", misAPrix=" + misAPrix
-				+ ", prixVente=" + prixVente + ", etatVente=" + etatVente + ", utilisateur=" + utilisateur
+				+ ", prixVente=" + prixVente + ", etatVente=" + etatVente + ", utilisateur=" + vendeur
 				+ ", enchere=" + enchere + ", categorie=" + categorie + ", retrait=" + retrait + "]";
 	}
 	

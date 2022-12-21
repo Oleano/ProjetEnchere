@@ -1,36 +1,36 @@
 package fr.eni.tfProjetEnchere.bo;
 
-import java.security.Timestamp;
+import java.time.LocalDate;
 
 public class Enchere {
-	private Timestamp dateEnchere;
+	private LocalDate dateEnchere;
 	private int montantEnchere;
-	private Utilisateur utilisateur;
+	private Utilisateur encherisseur;
 	private ArticleVendu articleVendu;
 	
 	public Enchere() {
 		super();
 	}
 
-	public Enchere(Timestamp dateEnchere, int montantEnchere, Utilisateur utilisateur, ArticleVendu articleVendu) {
+	public Enchere(LocalDate dateEnchere, int montantEnchere, Utilisateur encherisseur, ArticleVendu articleVendu) {
 		super();
 		this.dateEnchere = dateEnchere;
 		this.montantEnchere = montantEnchere;
-		this.utilisateur = utilisateur;
+		this.encherisseur = encherisseur;
 		this.articleVendu = articleVendu;
 	}
 
-	public Enchere(Timestamp dateEnchere, int montantEnchere) {
+	public Enchere(LocalDate dateEnchere, int montantEnchere) {
 		super();
 		this.dateEnchere = dateEnchere;
 		this.montantEnchere = montantEnchere;
 	}
 
-	public Timestamp getDateEnchere() {
+	public LocalDate getDateEnchere() {
 		return dateEnchere;
 	}
 
-	public void setDateEnchere(Timestamp dateEnchere) {
+	public void setDateEnchere(LocalDate dateEnchere) {
 		this.dateEnchere = dateEnchere;
 	}
 
@@ -42,12 +42,12 @@ public class Enchere {
 		this.montantEnchere = montantEnchere;
 	}
 
-	public Utilisateur getUtilisateur() {
-		return utilisateur;
+	public Utilisateur getEncherisseur() {
+		return encherisseur;
 	}
 
-	public void setUtilisateur(Utilisateur utilisateur) {
-		this.utilisateur = utilisateur;
+	public void setEncherisseur(Utilisateur encherisseur) {
+		this.encherisseur = encherisseur;
 	}
 
 	public ArticleVendu getArticleVendu() {
@@ -61,7 +61,7 @@ public class Enchere {
 	@Override
 	public String toString() {
 		return "Enchere [dateEnchere=" + dateEnchere + ", montantEnchere=" + montantEnchere + ", utilisateur="
-				+ utilisateur + ", articleVendu=" + articleVendu + "]";
+				+ encherisseur + ", articleVendu=" + articleVendu + "]";
 	}
 
 }
