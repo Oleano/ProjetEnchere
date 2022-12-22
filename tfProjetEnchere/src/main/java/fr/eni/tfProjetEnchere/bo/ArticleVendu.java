@@ -12,9 +12,9 @@ public class ArticleVendu {
 	private int misAPrix;
 	private int prixVente;
 	private String etatVente;
-	private Utilisateur vendeur;
+	private int vendeur;
 	private List<Enchere> enchere;
-	private Categorie categorie;
+	private int categorie;
 	private Retrait retrait;
 	
 	public ArticleVendu() {
@@ -22,8 +22,8 @@ public class ArticleVendu {
 	}
 
 	public ArticleVendu(int noArticle, String nomArticle, String description, LocalDate debutEnchere,
-			LocalDate finEnchere, int misAPrix, int prixVente, String etatVente, Utilisateur utilisateur,
-			List<Enchere> enchere, Categorie categorie, Retrait retrait) {
+			LocalDate finEnchere, int misAPrix, int prixVente, String etatVente, int vendeur,
+			List<Enchere> enchere, int categorie, Retrait retrait) {
 		super();
 		this.noArticle = noArticle;
 		this.nomArticle = nomArticle;
@@ -33,7 +33,7 @@ public class ArticleVendu {
 		this.misAPrix = misAPrix;
 		this.prixVente = prixVente;
 		this.etatVente = etatVente;
-		this.vendeur = utilisateur;
+		this.vendeur = vendeur;
 		this.enchere = enchere;
 		this.categorie = categorie;
 		this.retrait = retrait;
@@ -50,6 +50,21 @@ public class ArticleVendu {
 		this.misAPrix = misAPrix;
 		this.prixVente = prixVente;
 		this.etatVente = etatVente;
+	}
+	
+
+	public ArticleVendu(int noArticle, String nomArticle, String description, LocalDate debutEnchere,
+			LocalDate finEnchere, int misAPrix, int prixVente, int vendeur, int categorie) {
+		super();
+		this.noArticle = noArticle;
+		this.nomArticle = nomArticle;
+		this.description = description;
+		this.debutEnchere = debutEnchere;
+		this.finEnchere = finEnchere;
+		this.misAPrix = misAPrix;
+		this.prixVente = prixVente;
+		this.vendeur = vendeur;
+		this.categorie = categorie;
 	}
 
 	public int getNoArticle() {
@@ -116,11 +131,11 @@ public class ArticleVendu {
 		this.etatVente = etatVente;
 	}
 
-	public Utilisateur getVendeur() {
+	public int getVendeur() {
 		return vendeur;
 	}
 
-	public void setVendeur(Utilisateur vendeur) {
+	public void setVendeur(int vendeur) {
 		this.vendeur = vendeur;
 	}
 
@@ -132,11 +147,11 @@ public class ArticleVendu {
 		this.enchere = enchere;
 	}
 
-	public Categorie getCategorie() {
+	public int getCategorie() {
 		return categorie;
 	}
 
-	public void setCategorie(Categorie categorie) {
+	public void setCategorie(int categorie) {
 		this.categorie = categorie;
 	}
 
@@ -147,6 +162,7 @@ public class ArticleVendu {
 	public void setRetrait(Retrait retrait) {
 		this.retrait = retrait;
 	}
+	
 
 	@Override
 	public String toString() {
