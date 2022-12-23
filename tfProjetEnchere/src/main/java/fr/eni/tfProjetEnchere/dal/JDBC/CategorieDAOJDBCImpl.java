@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.tfProjetEnchere.bo.Categorie;
-import fr.eni.tfProjetEnchere.bo.Utilisateur;
 import fr.eni.tfProjetEnchere.dal.DALException;
 import fr.eni.tfProjetEnchere.dal.DAO.CategorieDAO;
 
