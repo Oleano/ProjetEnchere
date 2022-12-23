@@ -109,6 +109,26 @@ public class ArticleDAOJDBCImpl implements ArticleDAO {
 	}
 
 	@Override
+	public List<ArticleVendu> selectAllArticleByUtilisateur(int idUtilisateur) throws DALException, SQLException {
+		List<ArticleVendu> listeArticlesVendus = new ArrayList<ArticleVendu>();
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement pstmt = cnx.prepareStatement(SELECT_ALL_BY_UTILISATEURS);
+			pstmt.setInt(8, idUtilisateur);
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				listeArticlesVendus.add(new ArticleVendu(rs.getInt("no_article"), rs.getString("nom_article"),
+						rs.getString("description"), rs.getObject("date_debut_encheres", LocalDate.class),
+						rs.getObject("date_fin_encheres", LocalDate.class), rs.getInt("prix_initial"),
+						rs.getInt("prix_vente"), rs.getInt("no_utilisateur"), rs.getInt("no_categorie")));
+			}
+			cnx.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return listeArticlesVendus;
+	}
+
+	@Override
 	public void newArticle(ArticleVendu article) throws DALException, SQLException {
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement pstmt = cnx.prepareStatement(NEW_ARTICLE);

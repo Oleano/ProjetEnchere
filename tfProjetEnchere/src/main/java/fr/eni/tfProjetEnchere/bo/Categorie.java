@@ -6,7 +6,7 @@ public class Categorie {
 	private int noCategorie;
 	private String libelle;
 	private List<ArticleVendu> articleVendu;
-	
+
 	public Categorie() {
 		super();
 	}
@@ -53,5 +53,5 @@ public class Categorie {
 		return "Categorie [noCategorie=" + noCategorie + ", libelle=" + libelle + ", articleVendu=" + articleVendu
 				+ "]";
 	}
-	
+
 }

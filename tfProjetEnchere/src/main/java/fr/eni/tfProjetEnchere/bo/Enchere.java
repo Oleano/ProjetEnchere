@@ -7,7 +7,7 @@ public class Enchere {
 	private int montantEnchere;
 	private Utilisateur encherisseur;
 	private ArticleVendu articleVendu;
-	
+
 	public Enchere() {
 		super();
 	}

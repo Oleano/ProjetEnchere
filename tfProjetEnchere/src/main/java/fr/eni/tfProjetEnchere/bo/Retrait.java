@@ -5,7 +5,7 @@ public class Retrait {
 	private String codePostal;
 	private String ville;
 	private ArticleVendu articleVendu;
-	
+
 	public Retrait() {
 		super();
 	}

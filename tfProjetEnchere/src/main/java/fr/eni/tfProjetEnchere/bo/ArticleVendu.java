@@ -16,14 +16,14 @@ public class ArticleVendu {
 	private List<Enchere> enchere;
 	private int categorie;
 	private Retrait retrait;
-	
+
 	public ArticleVendu() {
 		super();
 	}
 
 	public ArticleVendu(int noArticle, String nomArticle, String description, LocalDate debutEnchere,
-			LocalDate finEnchere, int misAPrix, int prixVente, String etatVente, int vendeur,
-			List<Enchere> enchere, int categorie, Retrait retrait) {
+			LocalDate finEnchere, int misAPrix, int prixVente, String etatVente, int vendeur, List<Enchere> enchere,
+			int categorie, Retrait retrait) {
 		super();
 		this.noArticle = noArticle;
 		this.nomArticle = nomArticle;
@@ -51,7 +51,6 @@ public class ArticleVendu {
 		this.prixVente = prixVente;
 		this.etatVente = etatVente;
 	}
-	
 
 	public ArticleVendu(int noArticle, String nomArticle, String description, LocalDate debutEnchere,
 			LocalDate finEnchere, int misAPrix, int prixVente, int vendeur, int categorie) {
@@ -162,14 +161,13 @@ public class ArticleVendu {
 	public void setRetrait(Retrait retrait) {
 		this.retrait = retrait;
 	}
-	
 
 	@Override
 	public String toString() {
 		return "ArticleVendu [noArticle=" + noArticle + ", nomArticle=" + nomArticle + ", description=" + description
 				+ ", debutEnchere=" + debutEnchere + ", finEnchere=" + finEnchere + ", misAPrix=" + misAPrix
-				+ ", prixVente=" + prixVente + ", etatVente=" + etatVente + ", utilisateur=" + vendeur
-				+ ", enchere=" + enchere + ", categorie=" + categorie + ", retrait=" + retrait + "]";
+				+ ", prixVente=" + prixVente + ", etatVente=" + etatVente + ", utilisateur=" + vendeur + ", enchere="
+				+ enchere + ", categorie=" + categorie + ", retrait=" + retrait + "]";
 	}
-	
+
 }

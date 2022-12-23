@@ -8,14 +8,19 @@ import fr.eni.tfProjetEnchere.dal.DALException;
 
 public interface UtilisateurDAO {
 	public List<Utilisateur> selectAllUtilisateur() throws DALException, SQLException;
+
 	public Utilisateur selectUtilisateurById(int id) throws DALException, SQLException;
+
 	public Utilisateur selectUtilisateurByPseudo(String pseudo) throws DALException, SQLException;
-	
+
 	public void newUtilisateur(Utilisateur utilisateur) throws DALException, SQLException;
+
 	public void modifyUtilisateur(Utilisateur id) throws DALException, SQLException;
+
 	public void deleteUtilisateur(int id) throws DALException, SQLException;
-	
-	public Utilisateur selectLogin(String pseudoOuEmail, String password) throws DALException, SQLException;
-	public Utilisateur selectLoginMdpOublie(String pseudoOuEmail) throws DALException, SQLException;
+
+	public Utilisateur selectUtilisateurByLogin(String pseudoOuEmail, String motDePasse) throws DALException, SQLException;
+
+	public Utilisateur selectUtilisateurByLoginMdpOublie(String email) throws DALException, SQLException;
 
 }
