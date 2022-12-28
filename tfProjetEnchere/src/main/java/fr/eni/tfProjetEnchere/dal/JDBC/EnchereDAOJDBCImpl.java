@@ -60,10 +60,10 @@ public class EnchereDAOJDBCImpl implements EnchereDAO {
 	public void newEnchere(Enchere enchere) throws DALException, SQLException {
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement pstmt = cnx.prepareStatement(NEW_ENCHERE);
-			pstmt.setDate(2, java.sql.Date.valueOf(retrait.getDateEnchere()));
-			pstmt.setInt(3, retrait.getMontantEnchere());
-			pstmt.setInt(4, retrait.getArticleVendu());
-			pstmt.setInt(5, retrait.getEncherisseur());
+			pstmt.setDate(2, java.sql.Date.valueOf(enchere.getDateEnchere()));
+			pstmt.setInt(3, enchere.getMontantEnchere());
+			pstmt.setInt(4, enchere.getArticleVendu());
+			pstmt.setInt(5, enchere.getEncherisseur());
 
 			pstmt.executeUpdate();
 			cnx.close();
@@ -76,16 +76,16 @@ public class EnchereDAOJDBCImpl implements EnchereDAO {
 	
 	@Override
 	public Enchere bestEnchere(int noArticle) throws DALException, SQLException {
-		Enchere bestEnchere = new ArrayList<Enchere>();
+		Enchere bestEnchere = new Enchere();
 		try (Connection cnx = ConnectionProvider.getConnection()) { 
 			PreparedStatement pstmt = cnx.prepareStatement(BEST_ENCHERE);
 			pstmt.setInt(4, noArticle);
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
-				retrait.setsetDateEnchere(rs.getObject("date_enchere", LocalDate.class));
-				retrait.setMontantEnchere(rs.getInt("montant_enchere"));
-				retrait.setEncherisseur(rs.getInt("no_utilisateur"));
-				retrait.setArticleVendu(rs.getInt("no_article"));
+				bestEnchere.setDateEnchere(rs.getObject("date_enchere", LocalDate.class));
+				bestEnchere.setMontantEnchere(rs.getInt("montant_enchere"));
+				bestEnchere.setEncherisseur(rs.getInt("no_utilisateur"));
+				bestEnchere.setArticleVendu(rs.getInt("no_article"));
 			}
 			cnx.close();
 		} catch (Exception e) {
