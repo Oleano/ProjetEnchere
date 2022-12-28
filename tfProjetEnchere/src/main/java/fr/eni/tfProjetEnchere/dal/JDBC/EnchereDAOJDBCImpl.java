@@ -34,23 +34,64 @@ public class EnchereDAOJDBCImpl implements EnchereDAO {
 		}
 		return listeEncheres;
 	}
+	
+	//modifications du 27/12
 
 	@Override
 	public List<Enchere> selectMesEncheres(int idUtilisateur) throws DALException, SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		List<Enchere> listeMesEncheres = new ArrayList<Enchere>();
+		try (Connection cnx = ConnectionProvider.getConnection()) { 
+			PreparedStatement pstmt = cnx.prepareStatement(SELECT_MES_ENCHERE);
+			pstmt.setInt(5, idUtilisateur);
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				listeMesEncheres.add(new Enchere(rs.getObject("date_enchere", LocalDate.class),
+						rs.getInt("montant_enchere"), rs.getInt("no_article"), rs.getInt("no_utilisateur")));
+			}
+			cnx.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return listeMesEncheres;
 	}
 
+	//27/12 : modification des paramètres de la méthode -> (int noArticle, int montantEnchere, int idUtilisateur) remplacés par l'objet "Enchere"
 	@Override
-	public void newEnchere(int noArticle, int montantEnchere, int idUtilisateur) throws DALException, SQLException {
-		// TODO Auto-generated method stub
+	public void newEnchere(Enchere enchere) throws DALException, SQLException {
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement pstmt = cnx.prepareStatement(NEW_ENCHERE);
+			pstmt.setDate(2, java.sql.Date.valueOf(retrait.getDateEnchere()));
+			pstmt.setInt(3, retrait.getMontantEnchere());
+			pstmt.setInt(4, retrait.getArticleVendu());
+			pstmt.setInt(5, retrait.getEncherisseur());
 
+			pstmt.executeUpdate();
+			cnx.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
+	//modifications du 27/12
+	
 	@Override
 	public Enchere bestEnchere(int noArticle) throws DALException, SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		Enchere bestEnchere = new ArrayList<Enchere>();
+		try (Connection cnx = ConnectionProvider.getConnection()) { 
+			PreparedStatement pstmt = cnx.prepareStatement(BEST_ENCHERE);
+			pstmt.setInt(4, noArticle);
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				retrait.setsetDateEnchere(rs.getObject("date_enchere", LocalDate.class));
+				retrait.setMontantEnchere(rs.getInt("montant_enchere"));
+				retrait.setEncherisseur(rs.getInt("no_utilisateur"));
+				retrait.setArticleVendu(rs.getInt("no_article"));
+			}
+			cnx.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return bestEnchere;
 	}
 
 }
