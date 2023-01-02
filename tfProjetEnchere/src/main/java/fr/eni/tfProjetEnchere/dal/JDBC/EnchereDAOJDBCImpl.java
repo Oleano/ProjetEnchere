@@ -65,7 +65,7 @@ public class EnchereDAOJDBCImpl implements EnchereDAO {
 			pstmt.setInt(4, enchere.getArticleVendu());
 			pstmt.setInt(5, enchere.getEncherisseur());
 
-			pstmt.executeUpdate();
+			pstmt.executeUpdate();	
 			cnx.close();
 		} catch (Exception e) {
 			e.printStackTrace();

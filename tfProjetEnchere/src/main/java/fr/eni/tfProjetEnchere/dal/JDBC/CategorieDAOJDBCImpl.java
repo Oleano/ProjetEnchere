@@ -22,11 +22,15 @@ public class CategorieDAOJDBCImpl implements CategorieDAO {
 	@Override
 	public void newCategorie(Categorie categorie) throws DALException, SQLException {
 		try (Connection cnx = ConnectionProvider.getConnection()) {
-			PreparedStatement pstmt = cnx.prepareStatement(NEW_CATEGORIE);
+			PreparedStatement pstmt = cnx.prepareStatement(NEW_CATEGORIE, PreparedStatement.RETURN_GENERATED_KEYS);
 			pstmt.setInt(1, categorie.getNoCategorie());
 			pstmt.setString(2, categorie.getLibelle());
 
 			pstmt.executeUpdate();
+			ResultSet rs = pstmt.getGeneratedKeys();
+			if(rs.next()) {
+				categorie.setNoCategorie(rs.getInt(1));
+			}
 			cnx.close();
 		} catch (Exception e) {
 			e.printStackTrace();

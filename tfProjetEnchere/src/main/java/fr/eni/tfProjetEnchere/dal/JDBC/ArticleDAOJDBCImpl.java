@@ -131,17 +131,21 @@ public class ArticleDAOJDBCImpl implements ArticleDAO {
 	@Override
 	public void newArticle(ArticleVendu article) throws DALException, SQLException {
 		try (Connection cnx = ConnectionProvider.getConnection()) {
-			PreparedStatement pstmt = cnx.prepareStatement(NEW_ARTICLE);
-			pstmt.setString(2, article.getNomArticle());
-			pstmt.setString(3, article.getDescription());
-			pstmt.setDate(4, java.sql.Date.valueOf(article.getDebutEnchere()));
-			pstmt.setDate(5, java.sql.Date.valueOf(article.getFinEnchere()));
-			pstmt.setInt(6, article.getMisAPrix());
-			pstmt.setInt(7, article.getPrixVente());
-			pstmt.setInt(8, article.getVendeur());
-			pstmt.setInt(9, article.getCategorie());
+			PreparedStatement pstmt = cnx.prepareStatement(NEW_ARTICLE, PreparedStatement.RETURN_GENERATED_KEYS);
+			pstmt.setString(1, article.getNomArticle());
+			pstmt.setString(2, article.getDescription());
+			pstmt.setDate(3, java.sql.Date.valueOf(article.getDebutEnchere()));
+			pstmt.setDate(4, java.sql.Date.valueOf(article.getFinEnchere()));
+			pstmt.setInt(5, article.getMisAPrix());
+			pstmt.setInt(6, article.getPrixVente());
+			pstmt.setInt(7, article.getVendeur());
+			pstmt.setInt(8, article.getCategorie());
 
 			pstmt.executeUpdate();
+			ResultSet rs = pstmt.getGeneratedKeys();
+				if(rs.next()) {
+					article.setNoArticle(rs.getInt(1));
+				}
 			cnx.close();
 		} catch (Exception e) {
 			e.printStackTrace();
