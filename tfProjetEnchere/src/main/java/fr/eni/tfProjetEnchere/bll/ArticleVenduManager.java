@@ -15,7 +15,7 @@ import java.util.List;
 public class ArticleVenduManager {
 	private static ArticleDAO dao;
 
-	public void createArticleVendu(ArticleVendu articleVendu) throws BLLException, DALException {
+	public static void createArticleVendu(ArticleVendu articleVendu) throws BLLException, DALException {
 		BLLException bllException = validateArticleVendu(articleVendu);
 		if (bllException.hasErrors()) {
 			throw bllException;
@@ -146,7 +146,7 @@ public class ArticleVenduManager {
 		}
 	}
 
-	private BLLException validateArticleVendu(ArticleVendu articleVendu) {
+	private static BLLException validateArticleVendu(ArticleVendu articleVendu) {
 		BLLException bllException = new BLLException();
 		if (articleVendu.getNomArticle().length() > 30) {
 			bllException.addError(ErrorCodesBLL.ERROR_LENGTH_NOM_ARTICLE);

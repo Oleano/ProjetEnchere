@@ -25,7 +25,7 @@ public class UtilisateurManager extends HttpServlet {
     	
     }
 
-    public Utilisateur selectUtilisateurById(int id) throws DALException, SQLException {
+    public static Utilisateur selectUtilisateurById(int id) throws DALException, SQLException {
         return dao.selectUtilisateurById(id);
     }
     

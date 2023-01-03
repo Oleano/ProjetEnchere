@@ -183,4 +183,16 @@ public class ArticleVendu {
 		this.categorie = categorie;
 	}
 
+	public ArticleVendu(String nomArticle, String description, LocalDate debutEnchere, LocalDate finEnchere,
+			int misAPrix, int vendeur, int categorie) {
+		super();
+		this.nomArticle = nomArticle;
+		this.description = description;
+		this.debutEnchere = debutEnchere;
+		this.finEnchere = finEnchere;
+		this.misAPrix = misAPrix;
+		this.vendeur = vendeur;
+		this.categorie = categorie;
+	}
+
 }
