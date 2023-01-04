@@ -3,6 +3,8 @@ package fr.eni.tfProjetEnchere.bll;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.eni.tfProjetEnchere.dal.DALException;
+
 public class BLLException extends Exception {
 	    private static final long serialVersionUID = 1L;
 	    private List<Integer> listErrorCodes;
@@ -12,7 +14,11 @@ public class BLLException extends Exception {
 	        this.listErrorCodes=new ArrayList<>();
 	    }
 
-	    public void addError(int code)
+	    public BLLException(String string, DALException e) {
+			// TODO Auto-generated constructor stub
+		}
+
+		public void addError(int code)
 	    {
 	        if(!this.listErrorCodes.contains(code))
 	        {

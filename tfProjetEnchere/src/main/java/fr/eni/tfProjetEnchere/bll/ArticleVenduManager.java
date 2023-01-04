@@ -86,17 +86,15 @@ public class ArticleVenduManager {
 	}
 
 	public List<ArticleVendu> selectAllArticles() throws DALException, BLLException, SQLException {
-		List<ArticleVendu> articlesVendus = dao.selectAllArticle();
-		
-		
-		if (articlesVendus.isEmpty()) {
-			BLLException bllException = new BLLException();
-			bllException.addError(ErrorCodesBLL.ERROR_NO_RESULTS);
-			throw bllException;
-		} else {
-			return articlesVendus;
-		}
-	}
+		 List<ArticleVendu> listeArticle;
+	        try {
+	            listeArticle = dao.selectAllArticle();
+	        } catch (DALException e) {
+	            throw new BLLException("Erreur select articles all ",e);
+	        }
+	        return listeArticle;
+	    }
+	
 
 	public List<ArticleVendu> getArticlesFromCategory(int categorie) throws DALException, BLLException, SQLException {
 		List<ArticleVendu> articlesVendus = dao.selectAllArticle();
