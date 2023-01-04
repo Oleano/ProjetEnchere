@@ -1,4 +1,5 @@
 package Servlets;
+
 import java.io.IOException;
 import java.sql.SQLException;
 import javax.servlet.ServletException;
@@ -17,50 +18,50 @@ import fr.eni.tfProjetEnchere.dal.DALException;
 @WebServlet("/ConnexionServlet")
 public class ConnexionServlet extends HttpServlet {
 
-    /**
+	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
 	private final UtilisateurManager utilisateurManager = new UtilisateurManager();
 
-    HttpSession session;
+	HttpSession session;
 
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        session = request.getSession();
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+		session = request.getSession();
 
-        // ?action=deconnexion
-        String action=request.getParameter("action");
-        if ("deconnexion".equals(action)) {
-            doDeconnexion(request, response);
-            return;
-        }
+		// ?action=deconnexion
+		String action = request.getParameter("action");
+		if ("deconnexion".equals(action)) {
+			doDeconnexion(request, response);
+			return;
+		}
 
-        request.getRequestDispatcher("/WEB-INF/connexion.jsp").forward(request, response);
-    }
+		request.getRequestDispatcher("/WEB-INF/connexion.jsp").forward(request, response);
+	}
 
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
-        Utilisateur user;
+		Utilisateur user;
 
-        try {
-            user = utilisateurManager.selectUtilisateurByLogin(req.getParameter("pseudo"), req.getParameter("password"));
-            if(user != null){
+		try {
+			user = utilisateurManager.selectUtilisateurByLogin(req.getParameter("pseudo"),
+					req.getParameter("password"));
+			if (user != null) {
 
+				session.setAttribute("user", user);
 
-                session.setAttribute("user", user);
-
-                this.getServletContext().setAttribute("isAllowed", true);
-                this.getServletContext().setAttribute("isNotAllowed", false);
-                this.getServletContext().setAttribute("errorPassword", false);
-                resp.sendRedirect(req.getContextPath() + "/eniencheres");
-            } else {
-                req.setAttribute("isAllowed", false);
-                this.getServletContext().setAttribute("isNotAllowed", true);
-                resp.sendRedirect(req.getContextPath() + "/connexion");
-            }
-        } catch (DALException e) {
+				this.getServletContext().setAttribute("isAllowed", true);
+				this.getServletContext().setAttribute("isNotAllowed", false);
+				this.getServletContext().setAttribute("errorPassword", false);
+				resp.sendRedirect(req.getContextPath() + "/tfprojetenchere");
+			} else {
+				req.setAttribute("isAllowed", false);
+				this.getServletContext().setAttribute("isNotAllowed", true);
+				resp.sendRedirect(req.getContextPath() + "/connexion");
+			}
+		} catch (DALException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
@@ -68,15 +69,15 @@ public class ConnexionServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 
-    }
+	}
 
-    protected void doDeconnexion(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-                session.invalidate();
+	protected void doDeconnexion(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		session.invalidate();
 
-                this.getServletContext().setAttribute("isAllowed", false);
+		this.getServletContext().setAttribute("isAllowed", false);
 
-                resp.sendRedirect(req.getContextPath() + "/connexion");
+		resp.sendRedirect(req.getContextPath() + "/connexion");
 
-    }
+	}
 
 }

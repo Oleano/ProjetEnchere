@@ -5,6 +5,8 @@ import fr.eni.tfProjetEnchere.bo.Categorie;
 import fr.eni.tfProjetEnchere.bo.Utilisateur;
 import fr.eni.tfProjetEnchere.dal.DALException;
 import fr.eni.tfProjetEnchere.dal.DAO.ArticleDAO;
+import fr.eni.tfProjetEnchere.dal.JDBC.ArticleDAOJDBCImpl;
+
 import java.util.*;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -13,7 +15,7 @@ import java.util.Date;
 import java.util.List;
 
 public class ArticleVenduManager {
-	private static ArticleDAO dao;
+	private static ArticleDAOJDBCImpl dao;
 
 	public static void createArticleVendu(ArticleVendu articleVendu) throws BLLException, DALException {
 		BLLException bllException = validateArticleVendu(articleVendu);
@@ -83,18 +85,10 @@ public class ArticleVenduManager {
 		}
 	}
 
-	public List<ArticleVendu> selectAllArticles() throws DALException, BLLException {
-		List<ArticleVendu> articlesVendus;
-		articlesVendus = null;
-		try {
-			articlesVendus = dao.selectAllArticle();
-		} catch (DALException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public List<ArticleVendu> selectAllArticles() throws DALException, BLLException, SQLException {
+		List<ArticleVendu> articlesVendus = dao.selectAllArticle();
+		
+		
 		if (articlesVendus.isEmpty()) {
 			BLLException bllException = new BLLException();
 			bllException.addError(ErrorCodesBLL.ERROR_NO_RESULTS);
@@ -104,9 +98,9 @@ public class ArticleVenduManager {
 		}
 	}
 
-	public List<ArticleVendu> getArticlesFromCategory(int categorie) throws DALException, BLLException {
-		List<ArticleVendu> articlesVendus;
-		articlesVendus = null;
+	public List<ArticleVendu> getArticlesFromCategory(int categorie) throws DALException, BLLException, SQLException {
+		List<ArticleVendu> articlesVendus = dao.selectAllArticle();
+		
 		try {
 			articlesVendus = dao.selectArticleByCategorie(categorie);
 		} catch (DALException e) {

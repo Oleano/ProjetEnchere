@@ -23,82 +23,84 @@ import fr.eni.tfProjetEnchere.dal.DALException;
 @WebServlet("/ArticleServlet")
 public class ArticleServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-	    private ArticleVenduManager articleVenduManager;
-	    private RetraitManager retraitManager;
-	    private UtilisateurManager utilisateursManager;
-	    private ArticleVendu articleVendu;
-	    private Enchere enchere;
-	    private EnchereManager enchereManager;
 
-	    HttpSession session;
+	private ArticleVenduManager articleVenduManager;
+	private RetraitManager retraitManager;
+	private UtilisateurManager utilisateursManager;
+	private ArticleVendu articleVendu;
+	private Enchere enchere;
+	private EnchereManager enchereManager;
 
+	HttpSession session;
 
-	    @Override
-	    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	        String action = request.getParameter("action");
-	        if("getDetail".equals(action)){
-	       
-						try {
-							getDetail(request,response);
-						} catch (BLLException | DALException | SQLException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					 catch (ServletException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-	                return;
-	            
-	        }
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String action = request.getParameter("action");
+		if ("getDetail".equals(action)) {
 
-	        request.getRequestDispatcher("/WEB-INF/articleDetail.jsp").forward(request,response);
+			try {
+				getDetail(request, response);
+			} catch (BLLException | DALException | SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ServletException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return;
 
-	    }
+		}
 
+		request.getRequestDispatcher("/WEB-INF/articleDetail.jsp").forward(request, response);
 
-	    protected void getDetail(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, BLLException, DALException, SQLException {
-	        int id = Integer.parseInt(req.getParameter("noArticle"));
-	        Retrait retrait= null;
-	        Utilisateur user;
-	       
-	        try{
-	            articleVendu = articleVenduManager.getArticleById(id);
-	            enchere = enchereManager.bestEnchere(id);
-	            retrait = retraitManager.selectRetraitById(id);
-	            user = utilisateursManager.selectUtilisateurById(id);
-	            session = req.getSession();
-	            session.setAttribute("retrait",retrait);
-	            session.setAttribute("article",articleVendu);
-	            session.setAttribute("prixVente",enchere);
-	            session.setAttribute("userPseudo",user);
+	}
 
+	protected void getDetail(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException, BLLException, DALException, SQLException {
+		int id = Integer.parseInt(req.getParameter("noArticle"));
+		Retrait retrait = null;
+		Utilisateur user;
 
-	            resp.sendRedirect(req.getContextPath() + "/articleDetail");
-	        }catch (BLLException e){
-	            e.printStackTrace();
-	        }
+		try {
+			articleVendu = articleVenduManager.getArticleById(id);
+			enchere = enchereManager.bestEnchere(id);
+			retrait = retraitManager.selectRetraitById(id);
+			user = utilisateursManager.selectUtilisateurById(id);
+			session = req.getSession();
+			session.setAttribute("retrait", retrait);
+			session.setAttribute("article", articleVendu);
+			session.setAttribute("prixVente", enchere);
+			session.setAttribute("userPseudo", user);
 
-	    }
-	    @Override
-	    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-	        Integer credit = Integer.parseInt(req.getParameter("creditEnchere"));
-	        try{
-	            enchere = new Enchere(articleVendu.getFinEnchere(),credit,articleVendu.getNoArticle(), articleVendu.getVendeur());
-	            articleVendu = articleVenduManager.getArticleById(Integer.parseInt(req.getParameter("noArticle")));
-	            articleVendu = new ArticleVendu(Integer.parseInt(req.getParameter("noArticle")),articleVendu.getNomArticle(),articleVendu.getDescription(),articleVendu.getDebutEnchere(),articleVendu.getFinEnchere(),articleVendu.getMisAPrix(),enchere.getMontantEnchere(),articleVendu.getVendeur(),articleVendu.getNoArticle());
-	            enchereManager.createEnchere(enchere);
-	            articleVenduManager.updateArticle(articleVendu);
-	            session.setAttribute("prixVente", articleVendu.getPrixVente());
-	            resp.sendRedirect(req.getContextPath() + "/articleDetail");
-	        }catch (BLLException | NumberFormatException | DALException | SQLException e){
-	            e.printStackTrace();
-	        }
+			resp.sendRedirect(req.getContextPath() + "/articleDetail");
+		} catch (BLLException e) {
+			e.printStackTrace();
+		}
 
+	}
 
-	    }
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		Integer credit = Integer.parseInt(req.getParameter("creditEnchere"));
+		try {
+			enchere = new Enchere(articleVendu.getFinEnchere(), credit, articleVendu.getNoArticle(),
+					articleVendu.getVendeur());
+			articleVendu = articleVenduManager.getArticleById(Integer.parseInt(req.getParameter("noArticle")));
+			articleVendu = new ArticleVendu(Integer.parseInt(req.getParameter("noArticle")),
+					articleVendu.getNomArticle(), articleVendu.getDescription(), articleVendu.getDebutEnchere(),
+					articleVendu.getFinEnchere(), articleVendu.getMisAPrix(), enchere.getMontantEnchere(),
+					articleVendu.getVendeur(), articleVendu.getNoArticle());
+			enchereManager.createEnchere(enchere);
+			articleVenduManager.updateArticle(articleVendu);
+			session.setAttribute("prixVente", articleVendu.getPrixVente());
+			resp.sendRedirect(req.getContextPath() + "/articleDetail");
+		} catch (BLLException | NumberFormatException | DALException | SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
 }
