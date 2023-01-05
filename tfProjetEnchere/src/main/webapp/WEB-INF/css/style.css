@@ -1,80 +1,93 @@
 @charset "UTF-8";
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
-body{
-    font-family: 'Roboto', sans-serif;
-    background-image: linear-gradient(180deg, rgba(227, 227, 227, 1) 0%, rgba(255, 255, 255, 1) 56%);
+
+@import
+	url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap')
+	;
+
+body {
+	font-family: 'Roboto', sans-serif;
+	background-image: linear-gradient(180deg, rgba(227, 227, 227, 1) 0%,
+		rgba(255, 255, 255, 1) 56%);
 }
 
 .containerFilter {
-    margin: 0 auto;
+	margin: 0 auto;
 }
 
 .headerTitleEni {
-    color: #FFCBD2;
+	color: #FFCBD2;
 }
 
 #nullArticle {
-    color: brown;
-    text-align: center;
-    text-transform: uppercase;
+	color: brown;
+	text-align: center;
+	text-transform: uppercase;
 }
 
-.card-img-top{
-    border-top-right-radius: 10px;
-    border-top-left-radius: 10px;
-}
-span.text-muted{
-    font-size: 15px;
-}
-small.text-muted{
-    font-size: 12px;
-}
-h5.mb-0{
-    font-size: 1rem;
-}
-small.ghj{
-    font-size: 9px;
-}
-.mid{
-    background: #ECEDF1;
+.card-img-top {
+	border-top-right-radius: 10px;
+	border-top-left-radius: 10px;
 }
 
-.mid2{
-    background: #ffffff;
+span.text-muted {
+	font-size: 15px;
 }
 
-h6.ml-1{
-    font-size: 13px;
+small.text-muted {
+	font-size: 12px;
 }
 
-small.key{
-    text-decoration: underline;
-    font-size: 12px;
-    cursor: pointer;
+h5.mb-0 {
+	font-size: 1rem;
 }
-.btn-danger{
-    color: #FFCBD2;
+
+small.ghj {
+	font-size: 9px;
 }
-.btn-danger:focus{
-    box-shadow: none;
+
+.mid {
+	background: #ECEDF1;
 }
-small.justify-content-center{
-    font-size: 12px;
-    text-decoration: underline;
+
+.mid2 {
+	background: #ffffff;
+}
+
+h6.ml-1 {
+	font-size: 13px;
+}
+
+small.key {
+	text-decoration: underline;
+	font-size: 12px;
+	cursor: pointer;
+}
+
+.btn-danger {
+	color: #FFCBD2;
+}
+
+.btn-danger:focus {
+	box-shadow: none;
+}
+
+small.justify-content-center {
+	font-size: 12px;
+	text-decoration: underline;
 }
 
 .pseudoUtilisateur {
-    text-transform: uppercase;
+	text-transform: uppercase;
 }
 
 .img-article {
-    margin: 0 auto;
+	margin: 0 auto;
 }
 
 .titleNouvelleArticle {
-    color: #0a4275;
+	color: #0a4275;
 }
 
-.btnNewPrice {
-    --bs-btn-padding-x: 0.6rem !important;
+.btnNewPrice { 
+	-bs-btn-padding-x: 0.6rem !important;
 }

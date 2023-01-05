@@ -12,12 +12,12 @@ import fr.eni.tfProjetEnchere.dal.DALException;
 import fr.eni.tfProjetEnchere.dal.DAO.CategorieDAO;
 
 public class CategorieDAOJDBCImpl implements CategorieDAO {
-	private static final String NEW_CATEGORIE = "INSERT INTO CATEGORIE VALUES (?, ?)";
-	private static final String MODIFY_CATEGORIE = "UPDATE CATEGORIE SET no_categorie = ?, libelle = ?";
-	private static final String DELETE_CATEGORIE = "DELETE FROM CATEGORIE WHERE no_categorie = ?";
-	private static final String SELECT_ALL_CATEGORIE = "SELECT * FROM CATEGORIE";
-	private static final String SELECT_CATEGORIE_BY_NO = "SELECT * FROM CATEGORIE WHERE no_categorie = ?";
-	private static final String SELECT_CATEGORIE_BY_NAME = "SELECT * FROM CATEGORIE WHERE libelle = ?";
+	private static final String NEW_CATEGORIE = "INSERT INTO CATEGORIES VALUES (?, ?)";
+	private static final String MODIFY_CATEGORIE = "UPDATE CATEGORIES SET no_categorie = ?, libelle = ?";
+	private static final String DELETE_CATEGORIE = "DELETE FROM CATEGORIES WHERE no_categorie = ?";
+	private static final String SELECT_ALL_CATEGORIE = "SELECT * FROM CATEGORIES";
+	private static final String SELECT_CATEGORIE_BY_NO = "SELECT * FROM CATEGORIES WHERE no_categorie = ?";
+	private static final String SELECT_CATEGORIE_BY_NAME = "SELECT * FROM CATEGORIES WHERE libelle = ?";
 
 	@Override
 	public void newCategorie(Categorie categorie) throws DALException, SQLException {
@@ -28,7 +28,7 @@ public class CategorieDAOJDBCImpl implements CategorieDAO {
 
 			pstmt.executeUpdate();
 			ResultSet rs = pstmt.getGeneratedKeys();
-			if(rs.next()) {
+			if (rs.next()) {
 				categorie.setNoCategorie(rs.getInt(1));
 			}
 			cnx.close();

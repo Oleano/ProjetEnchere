@@ -12,8 +12,8 @@ import fr.eni.tfProjetEnchere.dal.DAO.UtilisateurDAO;
 
 public class UtilisateurDAOJDBCImpl implements UtilisateurDAO {
 	private static final String SELECT_ALL_UTILISATEURS = "SELECT * FROM UTILISATEURS";
-	private static final String SELECT_UTILISATEUR_BY_ID = "SELECT * FROM UTILISATEUR WHERE no_utilisateur = ?";
-	private static final String SELECT_UTILISATEUR_BY_PSEUDO = "SELECT * FROM UTILISATEUR WHERE pseudo = ?";
+	private static final String SELECT_UTILISATEUR_BY_ID = "SELECT * FROM UTILISATEURS WHERE no_utilisateur = ?";
+	private static final String SELECT_UTILISATEUR_BY_PSEUDO = "SELECT * FROM UTILISATEURS WHERE pseudo = ?";
 
 	private static final String NEW_UTILISATEUR = "INSERT INTO UTILISATEURS VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String MODIFY_UTILISATEUR = "UPDATE UTILISATEURS SET pseudo = ?, nom = ?, prenom = ?, email = ?, telephone = ?, rue = ?, code_postal = ?, ville = ?, mot_de_passe = ?, credit = ?, administrateur = ? WHERE no_utilisateur = ?";
@@ -118,7 +118,7 @@ public class UtilisateurDAOJDBCImpl implements UtilisateurDAO {
 
 			pstmt.executeUpdate();
 			ResultSet rs = pstmt.getGeneratedKeys();
-			if(rs.next()) {
+			if (rs.next()) {
 				utilisateur.setId(rs.getInt(1));
 			}
 			cnx.close();
@@ -169,15 +169,16 @@ public class UtilisateurDAOJDBCImpl implements UtilisateurDAO {
 	@Override
 	public Utilisateur selectUtilisateurByLogin(String pseudoOuEmail, String motDePasse)
 			throws DALException, SQLException {
-		Utilisateur user = new Utilisateur();
+		Utilisateur user=null;
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement pstmt = cnx.prepareStatement(SELECT_UTILISATEUR_BY_LOGIN);
+			pstmt.setString(1, pseudoOuEmail);
 			pstmt.setString(2, pseudoOuEmail);
-			pstmt.setString(5, pseudoOuEmail);
-			pstmt.setString(10, motDePasse);
+			pstmt.setString(3, motDePasse);
 
 			ResultSet rs = pstmt.executeQuery();
-			while (rs.next()) {
+			if(rs.next()) {
+				user=new Utilisateur();
 				user.setId(rs.getInt("no_utilisateur"));
 				user.setPseudo(rs.getString("pseudo"));
 				user.setNom(rs.getString("nom"));

@@ -32,7 +32,9 @@ public class ArticleDAOJDBCImpl implements ArticleDAO {
 				listeArticlesVendus.add(new ArticleVendu(rs.getInt("no_article"), rs.getString("nom_article"),
 						rs.getString("description"), rs.getObject("date_debut_encheres", LocalDate.class),
 						rs.getObject("date_fin_encheres", LocalDate.class), rs.getInt("prix_initial"),
-						rs.getInt("prix_vente"), new UtilisateurDAOJDBCImpl().selectUtilisateurById(rs.getInt("no_utilisateur")) ,new CategorieDAOJDBCImpl().selectCategorieByNo(rs.getInt("no_categorie"))));
+						rs.getInt("prix_vente"),
+						new UtilisateurDAOJDBCImpl().selectUtilisateurById(rs.getInt("no_utilisateur")),
+						new CategorieDAOJDBCImpl().selectCategorieByNo(rs.getInt("no_categorie"))));
 			}
 			cnx.close();
 		} catch (Exception e) {
@@ -56,7 +58,8 @@ public class ArticleDAOJDBCImpl implements ArticleDAO {
 				articleVendu.setFinEnchere(rs.getObject("date_fin_encheres", LocalDate.class));
 				articleVendu.setMisAPrix(rs.getInt("prix_initial"));
 				articleVendu.setPrixVente(rs.getInt("prix_vente"));
-				articleVendu.setVendeur(new UtilisateurDAOJDBCImpl().selectUtilisateurById(rs.getInt("no_utilisateur")));
+				articleVendu
+						.setVendeur(new UtilisateurDAOJDBCImpl().selectUtilisateurById(rs.getInt("no_utilisateur")));
 				articleVendu.setCategorie(new CategorieDAOJDBCImpl().selectCategorieByNo(rs.getInt("no_categorie")));
 			}
 			cnx.close();
@@ -77,7 +80,9 @@ public class ArticleDAOJDBCImpl implements ArticleDAO {
 				listeArticlesVendus.add(new ArticleVendu(rs.getInt("no_article"), rs.getString("nom_article"),
 						rs.getString("description"), rs.getObject("date_debut_encheres", LocalDate.class),
 						rs.getObject("date_fin_encheres", LocalDate.class), rs.getInt("prix_initial"),
-						rs.getInt("prix_vente"), new UtilisateurDAOJDBCImpl().selectUtilisateurById(rs.getInt("no_utilisateur")), new CategorieDAOJDBCImpl().selectCategorieByNo(rs.getInt("no_categorie"))));
+						rs.getInt("prix_vente"),
+						new UtilisateurDAOJDBCImpl().selectUtilisateurById(rs.getInt("no_utilisateur")),
+						new CategorieDAOJDBCImpl().selectCategorieByNo(rs.getInt("no_categorie"))));
 			}
 			cnx.close();
 		} catch (Exception e) {
@@ -98,7 +103,9 @@ public class ArticleDAOJDBCImpl implements ArticleDAO {
 				listeArticlesVendus.add(new ArticleVendu(rs.getInt("no_article"), rs.getString("nom_article"),
 						rs.getString("description"), rs.getObject("date_debut_encheres", LocalDate.class),
 						rs.getObject("date_fin_encheres", LocalDate.class), rs.getInt("prix_initial"),
-						rs.getInt("prix_vente"), new UtilisateurDAOJDBCImpl().selectUtilisateurById(rs.getInt("no_utilisateur")), new CategorieDAOJDBCImpl().selectCategorieByNo(rs.getInt("no_categorie"))));
+						rs.getInt("prix_vente"),
+						new UtilisateurDAOJDBCImpl().selectUtilisateurById(rs.getInt("no_utilisateur")),
+						new CategorieDAOJDBCImpl().selectCategorieByNo(rs.getInt("no_categorie"))));
 			}
 			cnx.close();
 		} catch (Exception e) {
@@ -119,7 +126,9 @@ public class ArticleDAOJDBCImpl implements ArticleDAO {
 				listeArticlesVendus.add(new ArticleVendu(rs.getInt("no_article"), rs.getString("nom_article"),
 						rs.getString("description"), rs.getObject("date_debut_encheres", LocalDate.class),
 						rs.getObject("date_fin_encheres", LocalDate.class), rs.getInt("prix_initial"),
-						rs.getInt("prix_vente"), new UtilisateurDAOJDBCImpl().selectUtilisateurById(rs.getInt("no_utilisateur")), new CategorieDAOJDBCImpl().selectCategorieByNo(rs.getInt("no_categorie"))));
+						rs.getInt("prix_vente"),
+						new UtilisateurDAOJDBCImpl().selectUtilisateurById(rs.getInt("no_utilisateur")),
+						new CategorieDAOJDBCImpl().selectCategorieByNo(rs.getInt("no_categorie"))));
 			}
 			cnx.close();
 		} catch (Exception e) {
@@ -143,9 +152,9 @@ public class ArticleDAOJDBCImpl implements ArticleDAO {
 
 			pstmt.executeUpdate();
 			ResultSet rs = pstmt.getGeneratedKeys();
-				if(rs.next()) {
-					article.setNoArticle(rs.getInt(1));
-				}
+			if (rs.next()) {
+				article.setNoArticle(rs.getInt(1));
+			}
 			cnx.close();
 		} catch (Exception e) {
 			e.printStackTrace();

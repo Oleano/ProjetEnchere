@@ -3,7 +3,6 @@ package fr.eni.tfProjetEnchere.ihm;
 import java.io.IOException;
 import java.sql.SQLException;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -48,9 +47,10 @@ public class ProfilUtilisateurServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		resp.sendRedirect(req.getContextPath() + "/eniencheres");
+		resp.sendRedirect(req.getContextPath() + "/tfProjetEnchere");
 	}
 
+	@SuppressWarnings("static-access")
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -75,7 +75,7 @@ public class ProfilUtilisateurServlet extends HttpServlet {
 
 				this.getServletContext().setAttribute("errorPasswordProfil", true);
 				System.out.println(user.getMotDePasse());
-				resp.sendRedirect(req.getContextPath() + "/profilServlet");
+				resp.sendRedirect(req.getContextPath() + "/ProfilUtilisateurServlet");
 			} else {
 				user = new Utilisateur(Integer.parseInt(req.getParameter("noUtilisateur")),
 						req.getParameter("profilPseudo"), req.getParameter("profilNom"),
@@ -87,7 +87,7 @@ public class ProfilUtilisateurServlet extends HttpServlet {
 				this.getServletContext().setAttribute("errorPasswordProfil", false);
 
 				session.setAttribute("user", user);
-				resp.sendRedirect(req.getContextPath() + "/eniencheres");
+				resp.sendRedirect(req.getContextPath() + "/tfProjetEnchere");
 			}
 		} catch (BLLException | DALException | SQLException e) {
 			e.printStackTrace();

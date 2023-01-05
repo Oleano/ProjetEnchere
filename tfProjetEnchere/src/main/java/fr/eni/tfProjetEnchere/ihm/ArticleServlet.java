@@ -20,16 +20,16 @@ import fr.eni.tfProjetEnchere.bo.Retrait;
 import fr.eni.tfProjetEnchere.bo.Utilisateur;
 import fr.eni.tfProjetEnchere.dal.DALException;
 
-@WebServlet("/ArticleServlet")
+@WebServlet("/articleDetail")
 public class ArticleServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	private ArticleVenduManager articleVenduManager;
-	private RetraitManager retraitManager;
-	private UtilisateurManager utilisateursManager;
+	private ArticleVenduManager articleVenduManager = new ArticleVenduManager();
+	private RetraitManager retraitManager = new RetraitManager();
+	private UtilisateurManager utilisateursManager = new UtilisateurManager();
 	private ArticleVendu articleVendu;
 	private Enchere enchere;
-	private EnchereManager enchereManager;
+	private EnchereManager enchereManager = new EnchereManager() ;
 
 	HttpSession session;
 
@@ -54,11 +54,12 @@ public class ArticleServlet extends HttpServlet {
 			return;
 
 		}
-
+		
 		request.getRequestDispatcher("/WEB-INF/articleDetail.jsp").forward(request, response);
 
 	}
 
+	@SuppressWarnings("static-access")
 	protected void getDetail(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException, BLLException, DALException, SQLException {
 		int id = Integer.parseInt(req.getParameter("noArticle"));
@@ -76,7 +77,7 @@ public class ArticleServlet extends HttpServlet {
 			session.setAttribute("prixVente", enchere);
 			session.setAttribute("userPseudo", user);
 
-			resp.sendRedirect(req.getContextPath() + "/articleDetail");
+			(req.getRequestDispatcher("/WEB-INF/articleDetail.jsp")).forward(req, resp);
 		} catch (BLLException e) {
 			e.printStackTrace();
 		}

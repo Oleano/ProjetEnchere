@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import fr.eni.tfProjetEnchere.bo.ArticleVendu;
 import fr.eni.tfProjetEnchere.bo.Enchere;
 import fr.eni.tfProjetEnchere.dal.DALException;
 import fr.eni.tfProjetEnchere.dal.DAO.EnchereDAO;
@@ -34,13 +33,13 @@ public class EnchereDAOJDBCImpl implements EnchereDAO {
 		}
 		return listeEncheres;
 	}
-	
-	//modifications du 27/12
+
+	// modifications du 27/12
 
 	@Override
 	public List<Enchere> selectMesEncheres(int idUtilisateur) throws DALException, SQLException {
 		List<Enchere> listeMesEncheres = new ArrayList<Enchere>();
-		try (Connection cnx = ConnectionProvider.getConnection()) { 
+		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement pstmt = cnx.prepareStatement(SELECT_MES_ENCHERE);
 			pstmt.setInt(5, idUtilisateur);
 			ResultSet rs = pstmt.executeQuery();
@@ -55,7 +54,8 @@ public class EnchereDAOJDBCImpl implements EnchereDAO {
 		return listeMesEncheres;
 	}
 
-	//27/12 : modification des paramètres de la méthode -> (int noArticle, int montantEnchere, int idUtilisateur) remplacés par l'objet "Enchere"
+	// 27/12 : modification des paramètres de la méthode -> (int noArticle, int
+	// montantEnchere, int idUtilisateur) remplacés par l'objet "Enchere"
 	@Override
 	public void newEnchere(Enchere enchere) throws DALException, SQLException {
 		try (Connection cnx = ConnectionProvider.getConnection()) {
@@ -65,19 +65,19 @@ public class EnchereDAOJDBCImpl implements EnchereDAO {
 			pstmt.setInt(4, enchere.getArticleVendu());
 			pstmt.setInt(5, enchere.getEncherisseur());
 
-			pstmt.executeUpdate();	
+			pstmt.executeUpdate();
 			cnx.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	//modifications du 27/12
-	
+	// modifications du 27/12
+
 	@Override
 	public Enchere bestEnchere(int noArticle) throws DALException, SQLException {
 		Enchere bestEnchere = new Enchere();
-		try (Connection cnx = ConnectionProvider.getConnection()) { 
+		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement pstmt = cnx.prepareStatement(BEST_ENCHERE);
 			pstmt.setInt(4, noArticle);
 			ResultSet rs = pstmt.executeQuery();

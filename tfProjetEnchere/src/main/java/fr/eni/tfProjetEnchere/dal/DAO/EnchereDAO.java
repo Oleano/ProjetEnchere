@@ -11,7 +11,7 @@ public interface EnchereDAO {
 
 	public List<Enchere> selectMesEncheres(int idUtilisateur) throws DALException, SQLException;
 
-	public void newEnchere(Enchere enchere) throws DALException, SQLException; // modif du 27/12 : paramètres (int noArticle, int montantEnchere, int idUtilisateur) remplacés par l'objet "Enchere" 
+	public void newEnchere(Enchere enchere) throws DALException, SQLException;
 
 	public Enchere bestEnchere(int noArticle) throws DALException, SQLException;
 }

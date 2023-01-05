@@ -1,17 +1,10 @@
 package fr.eni.tfProjetEnchere.bll;
 
 import fr.eni.tfProjetEnchere.bo.ArticleVendu;
-import fr.eni.tfProjetEnchere.bo.Categorie;
-import fr.eni.tfProjetEnchere.bo.Utilisateur;
 import fr.eni.tfProjetEnchere.dal.DALException;
-import fr.eni.tfProjetEnchere.dal.DAO.ArticleDAO;
 import fr.eni.tfProjetEnchere.dal.JDBC.ArticleDAOJDBCImpl;
 
-import java.util.*;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 public class ArticleVenduManager {
@@ -52,9 +45,9 @@ public class ArticleVenduManager {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-	return articleVendu;
-}
+
+		return articleVendu;
+	}
 
 	public void updateArticle(ArticleVendu articleToUpdate) throws BLLException, DALException {
 		BLLException bllException = validateArticleVendu(articleToUpdate);
@@ -86,19 +79,18 @@ public class ArticleVenduManager {
 	}
 
 	public List<ArticleVendu> selectAllArticles() throws DALException, BLLException, SQLException {
-		 List<ArticleVendu> listeArticle;
-	        try {
-	            listeArticle = dao.selectAllArticle();
-	        } catch (DALException e) {
-	            throw new BLLException("Erreur select articles all ",e);
-	        }
-	        return listeArticle;
-	    }
-	
+		List<ArticleVendu> listeArticle;
+		try {
+			listeArticle = dao.selectAllArticle();
+		} catch (DALException e) {
+			throw new BLLException("Erreur select articles all ", e);
+		}
+		return listeArticle;
+	}
 
 	public List<ArticleVendu> getArticlesFromCategory(int categorie) throws DALException, BLLException, SQLException {
 		List<ArticleVendu> articlesVendus = dao.selectAllArticle();
-		
+
 		try {
 			articlesVendus = dao.selectArticleByCategorie(categorie);
 		} catch (DALException e) {

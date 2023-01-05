@@ -19,7 +19,8 @@ public interface UtilisateurDAO {
 
 	public void deleteUtilisateur(int id) throws DALException, SQLException;
 
-	public Utilisateur selectUtilisateurByLogin(String pseudoOuEmail, String motDePasse) throws DALException, SQLException;
+	public Utilisateur selectUtilisateurByLogin(String pseudoOuEmail, String motDePasse)
+			throws DALException, SQLException;
 
 	public Utilisateur selectUtilisateurByLoginMdpOublie(String email) throws DALException, SQLException;
 

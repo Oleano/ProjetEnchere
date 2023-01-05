@@ -9,7 +9,7 @@ public class Retrait {
 	public Retrait() {
 		super();
 	}
-	
+
 	public Retrait(String rue, String codePostal, String ville, int noArticle) {
 		super();
 		this.rue = rue;
@@ -52,18 +52,19 @@ public class Retrait {
 	public int getnoArticle() {
 		return noArticle;
 	}
-	
-	public void setNoArticle() {
+
+	public void setNoArticle(int noArticle) {
 		this.noArticle = noArticle;
 	}
+
 	public void setArticleVendu(int noArticle) {
 		this.noArticle = noArticle;
 	}
 
 	@Override
 	public String toString() {
-		return "Retrait [rue=" + rue + ", codePostal=" + codePostal + ", ville=" + ville + ", noArticle="
-				+ noArticle + "]";
+		return "Retrait [rue=" + rue + ", codePostal=" + codePostal + ", ville=" + ville + ", noArticle=" + noArticle
+				+ "]";
 	}
 
 }

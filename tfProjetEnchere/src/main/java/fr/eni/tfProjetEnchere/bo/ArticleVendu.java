@@ -17,16 +17,13 @@ public class ArticleVendu {
 	private Categorie categorie;
 	private Retrait retrait;
 
-	
-	
-
 	public ArticleVendu() {
 		super();
 	}
 
 	public ArticleVendu(int noArticle, String nomArticle, String description, LocalDate debutEnchere,
-			LocalDate finEnchere, int misAPrix, int prixVente, String etatVente, Utilisateur vendeur, List<Enchere> enchere,
-			Categorie categorie, Retrait retrait) {
+			LocalDate finEnchere, int misAPrix, int prixVente, String etatVente, Utilisateur vendeur,
+			List<Enchere> enchere, Categorie categorie, Retrait retrait) {
 		super();
 		this.noArticle = noArticle;
 		this.nomArticle = nomArticle;
@@ -202,8 +199,5 @@ public class ArticleVendu {
 			LocalDate finEnchere2, int misAPrix2, int montantEnchere, Utilisateur vendeur2, int noArticle2) {
 		// TODO Auto-generated constructor stub
 	}
-
-
-	
 
 }

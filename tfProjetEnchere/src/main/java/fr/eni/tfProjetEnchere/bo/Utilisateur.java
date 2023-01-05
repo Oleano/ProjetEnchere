@@ -57,7 +57,6 @@ public class Utilisateur {
 		this.credit = credit;
 		this.administrateur = administrateur;
 	}
-	
 
 	public Utilisateur(String pseudo, String nom, String prenom, String email, String telephone, String rue,
 			String codePostal, String ville, String motDePasse) {

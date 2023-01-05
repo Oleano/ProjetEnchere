@@ -13,7 +13,6 @@ import fr.eni.tfProjetEnchere.bll.ArticleVenduManager;
 import fr.eni.tfProjetEnchere.bll.BLLException;
 import fr.eni.tfProjetEnchere.bll.CategorieManager;
 import fr.eni.tfProjetEnchere.bll.EnchereManager;
-import fr.eni.tfProjetEnchere.bll.FactoryBLL;
 import fr.eni.tfProjetEnchere.bo.ArticleVendu;
 import fr.eni.tfProjetEnchere.dal.DALException;
 
@@ -29,13 +28,12 @@ public class EnchereServlet extends HttpServlet {
 	private EnchereManager enchereManager;
 
 	HttpSession session;
+
 	public EnchereServlet() {
 		articleVenduManager = new ArticleVenduManager();
 		categoriesManager = new CategorieManager();
 		enchereManager = new EnchereManager();
 	}
-
-	
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		try {

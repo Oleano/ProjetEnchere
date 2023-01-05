@@ -15,7 +15,7 @@ import fr.eni.tfProjetEnchere.dal.DALException;
 /**
  * Servlet implementation class ConnexionServlet
  */
-@WebServlet("/ConnexionServlet")
+@WebServlet("/connexion")
 public class ConnexionServlet extends HttpServlet {
 
 	/**
@@ -49,13 +49,15 @@ public class ConnexionServlet extends HttpServlet {
 			user = utilisateurManager.selectUtilisateurByLogin(req.getParameter("pseudo"),
 					req.getParameter("password"));
 			if (user != null) {
-
+				
+				session = req.getSession();
 				session.setAttribute("user", user);
+				
 
 				this.getServletContext().setAttribute("isAllowed", true);
 				this.getServletContext().setAttribute("isNotAllowed", false);
 				this.getServletContext().setAttribute("errorPassword", false);
-				resp.sendRedirect(req.getContextPath() + "/tfprojetenchere");
+				resp.sendRedirect(req.getContextPath() + "/EnchereServlet");
 			} else {
 				req.setAttribute("isAllowed", false);
 				this.getServletContext().setAttribute("isNotAllowed", true);
