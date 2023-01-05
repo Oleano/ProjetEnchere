@@ -32,7 +32,7 @@ public class ArticleDAOJDBCImpl implements ArticleDAO {
 				listeArticlesVendus.add(new ArticleVendu(rs.getInt("no_article"), rs.getString("nom_article"),
 						rs.getString("description"), rs.getObject("date_debut_encheres", LocalDate.class),
 						rs.getObject("date_fin_encheres", LocalDate.class), rs.getInt("prix_initial"),
-						rs.getInt("prix_vente"), rs.getInt("no_utilisateur"), rs.getInt("no_categorie")));
+						rs.getInt("prix_vente"), new UtilisateurDAOJDBCImpl().selectUtilisateurById(rs.getInt("no_utilisateur")) ,new CategorieDAOJDBCImpl().selectCategorieByNo(rs.getInt("no_categorie"))));
 			}
 			cnx.close();
 		} catch (Exception e) {
@@ -56,8 +56,8 @@ public class ArticleDAOJDBCImpl implements ArticleDAO {
 				articleVendu.setFinEnchere(rs.getObject("date_fin_encheres", LocalDate.class));
 				articleVendu.setMisAPrix(rs.getInt("prix_initial"));
 				articleVendu.setPrixVente(rs.getInt("prix_vente"));
-				articleVendu.setVendeur(rs.getInt("no_utilisateur"));
-				articleVendu.setCategorie(rs.getInt("no_categorie"));
+				articleVendu.setVendeur(new UtilisateurDAOJDBCImpl().selectUtilisateurById(rs.getInt("no_utilisateur")));
+				articleVendu.setCategorie(new CategorieDAOJDBCImpl().selectCategorieByNo(rs.getInt("no_categorie")));
 			}
 			cnx.close();
 		} catch (Exception e) {
@@ -77,7 +77,7 @@ public class ArticleDAOJDBCImpl implements ArticleDAO {
 				listeArticlesVendus.add(new ArticleVendu(rs.getInt("no_article"), rs.getString("nom_article"),
 						rs.getString("description"), rs.getObject("date_debut_encheres", LocalDate.class),
 						rs.getObject("date_fin_encheres", LocalDate.class), rs.getInt("prix_initial"),
-						rs.getInt("prix_vente"), rs.getInt("no_utilisateur"), rs.getInt("no_categorie")));
+						rs.getInt("prix_vente"), new UtilisateurDAOJDBCImpl().selectUtilisateurById(rs.getInt("no_utilisateur")), new CategorieDAOJDBCImpl().selectCategorieByNo(rs.getInt("no_categorie"))));
 			}
 			cnx.close();
 		} catch (Exception e) {
@@ -98,7 +98,7 @@ public class ArticleDAOJDBCImpl implements ArticleDAO {
 				listeArticlesVendus.add(new ArticleVendu(rs.getInt("no_article"), rs.getString("nom_article"),
 						rs.getString("description"), rs.getObject("date_debut_encheres", LocalDate.class),
 						rs.getObject("date_fin_encheres", LocalDate.class), rs.getInt("prix_initial"),
-						rs.getInt("prix_vente"), rs.getInt("no_utilisateur"), rs.getInt("no_categorie")));
+						rs.getInt("prix_vente"), new UtilisateurDAOJDBCImpl().selectUtilisateurById(rs.getInt("no_utilisateur")), new CategorieDAOJDBCImpl().selectCategorieByNo(rs.getInt("no_categorie"))));
 			}
 			cnx.close();
 		} catch (Exception e) {
@@ -119,7 +119,7 @@ public class ArticleDAOJDBCImpl implements ArticleDAO {
 				listeArticlesVendus.add(new ArticleVendu(rs.getInt("no_article"), rs.getString("nom_article"),
 						rs.getString("description"), rs.getObject("date_debut_encheres", LocalDate.class),
 						rs.getObject("date_fin_encheres", LocalDate.class), rs.getInt("prix_initial"),
-						rs.getInt("prix_vente"), rs.getInt("no_utilisateur"), rs.getInt("no_categorie")));
+						rs.getInt("prix_vente"), new UtilisateurDAOJDBCImpl().selectUtilisateurById(rs.getInt("no_utilisateur")), new CategorieDAOJDBCImpl().selectCategorieByNo(rs.getInt("no_categorie"))));
 			}
 			cnx.close();
 		} catch (Exception e) {
@@ -138,8 +138,8 @@ public class ArticleDAOJDBCImpl implements ArticleDAO {
 			pstmt.setDate(4, java.sql.Date.valueOf(article.getFinEnchere()));
 			pstmt.setInt(5, article.getMisAPrix());
 			pstmt.setInt(6, article.getPrixVente());
-			pstmt.setInt(7, article.getVendeur());
-			pstmt.setInt(8, article.getCategorie());
+			pstmt.setInt(7, article.getVendeur().getId());
+			pstmt.setInt(8, article.getCategorie().getNoCategorie());
 
 			pstmt.executeUpdate();
 			ResultSet rs = pstmt.getGeneratedKeys();
@@ -163,8 +163,8 @@ public class ArticleDAOJDBCImpl implements ArticleDAO {
 			pstmt.setDate(5, java.sql.Date.valueOf(noArticle.getFinEnchere()));
 			pstmt.setInt(6, noArticle.getMisAPrix());
 			pstmt.setInt(7, noArticle.getPrixVente());
-			pstmt.setInt(8, noArticle.getVendeur());
-			pstmt.setInt(9, noArticle.getCategorie());
+			pstmt.setInt(8, noArticle.getVendeur().getId());
+			pstmt.setInt(9, noArticle.getCategorie().getNoCategorie());
 
 			pstmt.executeUpdate();
 			cnx.close();

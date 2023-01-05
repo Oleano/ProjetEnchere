@@ -6,9 +6,10 @@ import java.util.List;
 import fr.eni.tfProjetEnchere.bo.Categorie;
 import fr.eni.tfProjetEnchere.dal.DALException;
 import fr.eni.tfProjetEnchere.dal.DAO.CategorieDAO;
+import fr.eni.tfProjetEnchere.dal.JDBC.CategorieDAOJDBCImpl;
 
 public class CategorieManager {
-	 private static CategorieDAO dao;
+	 private static CategorieDAO dao = new CategorieDAOJDBCImpl();
 	 
 	    public void createCategorie(Categorie categorie) throws DALException, BLLException {
 	        BLLException bllException = new BLLException();

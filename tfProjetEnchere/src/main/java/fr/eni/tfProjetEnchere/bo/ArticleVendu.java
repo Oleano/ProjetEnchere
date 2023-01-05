@@ -12,18 +12,21 @@ public class ArticleVendu {
 	private int misAPrix;
 	private int prixVente;
 	private String etatVente;
-	private int vendeur;
+	private Utilisateur vendeur;
 	private List<Enchere> enchere;
-	private int categorie;
+	private Categorie categorie;
 	private Retrait retrait;
+
+	
+	
 
 	public ArticleVendu() {
 		super();
 	}
 
 	public ArticleVendu(int noArticle, String nomArticle, String description, LocalDate debutEnchere,
-			LocalDate finEnchere, int misAPrix, int prixVente, String etatVente, int vendeur, List<Enchere> enchere,
-			int categorie, Retrait retrait) {
+			LocalDate finEnchere, int misAPrix, int prixVente, String etatVente, Utilisateur vendeur, List<Enchere> enchere,
+			Categorie categorie, Retrait retrait) {
 		super();
 		this.noArticle = noArticle;
 		this.nomArticle = nomArticle;
@@ -53,7 +56,7 @@ public class ArticleVendu {
 	}
 
 	public ArticleVendu(int noArticle, String nomArticle, String description, LocalDate debutEnchere,
-			LocalDate finEnchere, int misAPrix, int prixVente, int vendeur, int categorie) {
+			LocalDate finEnchere, int misAPrix, int prixVente, Utilisateur vendeur, Categorie categorie) {
 		super();
 		this.noArticle = noArticle;
 		this.nomArticle = nomArticle;
@@ -130,11 +133,11 @@ public class ArticleVendu {
 		this.etatVente = etatVente;
 	}
 
-	public int getVendeur() {
+	public Utilisateur getVendeur() {
 		return vendeur;
 	}
 
-	public void setVendeur(int vendeur) {
+	public void setVendeur(Utilisateur vendeur) {
 		this.vendeur = vendeur;
 	}
 
@@ -146,11 +149,11 @@ public class ArticleVendu {
 		this.enchere = enchere;
 	}
 
-	public int getCategorie() {
+	public Categorie getCategorie() {
 		return categorie;
 	}
 
-	public void setCategorie(int categorie) {
+	public void setCategorie(Categorie categorie) {
 		this.categorie = categorie;
 	}
 
@@ -171,7 +174,7 @@ public class ArticleVendu {
 	}
 
 	public ArticleVendu(String nomArticle, String description, LocalDate debutEnchere, LocalDate finEnchere,
-			int misAPrix, int prixVente, int vendeur, int categorie) {
+			int misAPrix, int prixVente, Utilisateur vendeur, Categorie categorie) {
 		super();
 		this.nomArticle = nomArticle;
 		this.description = description;
@@ -184,7 +187,7 @@ public class ArticleVendu {
 	}
 
 	public ArticleVendu(String nomArticle, String description, LocalDate debutEnchere, LocalDate finEnchere,
-			int misAPrix, int vendeur, int categorie) {
+			int misAPrix, Utilisateur vendeur, Categorie categorie) {
 		super();
 		this.nomArticle = nomArticle;
 		this.description = description;
@@ -194,5 +197,13 @@ public class ArticleVendu {
 		this.vendeur = vendeur;
 		this.categorie = categorie;
 	}
+
+	public ArticleVendu(int parseInt, String nomArticle2, String description2, LocalDate debutEnchere2,
+			LocalDate finEnchere2, int misAPrix2, int montantEnchere, Utilisateur vendeur2, int noArticle2) {
+		// TODO Auto-generated constructor stub
+	}
+
+
+	
 
 }

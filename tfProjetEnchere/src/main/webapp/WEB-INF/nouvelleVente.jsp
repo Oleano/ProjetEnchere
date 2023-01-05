@@ -57,10 +57,10 @@
             </li>
             <c:if test="${isAllowed}">
             <li class="nav-item">
-              <a class="nav-link" href="${pageContext.request.contextPath}/venteArticleServlet">Vendre un Article</a>
+              <a class="nav-link" href="${pageContext.request.contextPath}/VenteArticleServlet">Vendre un Article</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="${pageContext.request.contextPath}/profilServlet">Mon Profil</a>
+              <a class="nav-link" href="${pageContext.request.contextPath}/ProfilUtilisateurServlet">Mon Profil</a>
             </li>
           </ul>
         </div>
@@ -71,7 +71,7 @@
             <a href="${pageContext.request.contextPath}/connexion"><button type="button" class="btn btn-primary me-3 shadow-2">CREER UN COMPTE</button></a>
           </c:if>
           <c:if test="${isAllowed}">
-            <a class="nav-link" href="${pageContext.request.contextPath}/profilServlet"><button type="button" class="btn btn-outline-success me-3 shadow-2">${user.pseudo}, ${user.credit} Crédits</button></a>
+            <a class="nav-link" href="${pageContext.request.contextPath}/ProfilUtilisateurServlet"><button type="button" class="btn btn-outline-success me-3 shadow-2">${userPseudo.pseudo}, ${userPseudo.credit} Crédits</button></a>
             <a href="${pageContext.request.contextPath}/connexion?action=deconnexion"><button type="button" class="btn btn-warning me-3 shadow-2">DECONNEXION</button></a>
           </c:if>
         </div>
@@ -91,11 +91,11 @@
     <section class="container d-flex justify-content-center border rounded-2 p-4 bg-white shadow-1">
 
         <!-- Formulaire Nouvelle Vente -->
-      <form action="${pageContext.request.contextPath}/venteArticleServlet" method="post">
+      <form action="${pageContext.request.contextPath}/VenteArticleServlet" method="post">
         <div class="d-flex flex-column">
 
             <div class="col-12">
-                <input type="hidden" name="registerNoUtilisateur" value="${user.noUtilisateur}">
+                <input type="hidden" name="registerNoUtilisateur" value="${userPseudo.id}">
 
                 <div class="form-outline mb-3">
                   <input type="text" id="formNomArticle" name="registerArticle" class="form-control" required/>
@@ -140,18 +140,18 @@
                 <p class="h4 my-3 text-center">ADRESSE DE RETRAIT</p>
 
                 <div class="form-outline mb-3">
-                  <input type="text" id="formRetraitRue" name="registerRetraitRue" class="form-control"  value="${user.rue}" disabled/>
+                  <input type="text" id="formRetraitRue" name="registerRetraitRue" class="form-control"  value="${userPseudo.rue}" disabled/>
                   <label class="form-label" name="registerRetraitRue" for="formRetraitRue">Rue</label>
                 </div>
 
                 <div class="d-flex gap-2">
                   <div class="form-outline mb-3">
-                    <input type="number" id="formRetraitCodePostal" name="registerRetraitCodePostal" class="form-control" value="${user.codePostal}" disabled/>
+                    <input type="number" id="formRetraitCodePostal" name="registerRetraitCodePostal" class="form-control" value="${userPseudo.codePostal}" disabled/>
                     <label class="form-label" name="registerRetraitCodePostal" for="formRetraitCodePostal">Code Postal</label>
                   </div>
 
                   <div class="form-outline mb-3">
-                    <input type="text" id="formRetraitVille" name="registerRetraitVille" class="form-control" value="${user.ville}" disabled/>
+                    <input type="text" id="formRetraitVille" name="registerRetraitVille" class="form-control" value="${userPseudo.ville}" disabled/>
                     <label class="form-label" name="registerRetraitVille" for="formRetraitVille">Ville</label>
                   </div>
                 </div>

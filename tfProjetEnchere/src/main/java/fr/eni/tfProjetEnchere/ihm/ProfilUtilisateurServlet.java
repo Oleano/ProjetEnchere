@@ -1,4 +1,4 @@
-package Servlets;
+package fr.eni.tfProjetEnchere.ihm;
 
 import java.io.IOException;
 import java.sql.SQLException;

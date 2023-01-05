@@ -8,9 +8,10 @@ import javax.servlet.http.HttpServlet;
 import fr.eni.tfProjetEnchere.bo.Utilisateur;
 import fr.eni.tfProjetEnchere.dal.DALException;
 import fr.eni.tfProjetEnchere.dal.DAO.UtilisateurDAO;
+import fr.eni.tfProjetEnchere.dal.JDBC.UtilisateurDAOJDBCImpl;
 
 public class UtilisateurManager extends HttpServlet {
-	private static UtilisateurDAO dao;
+	private static UtilisateurDAO dao = new UtilisateurDAOJDBCImpl();
 
     public void newUtilisateur(Utilisateur utilisateur) throws BLLException, DALException, SQLException {
         BLLException bllException = validateUtilisateur(utilisateur);

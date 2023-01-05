@@ -1,4 +1,4 @@
-package Servlets;
+package fr.eni.tfProjetEnchere.ihm;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -53,11 +53,11 @@ public class InscriptionServlet extends HttpServlet {
 			}
 			passwordAllowed = false;
 			this.getServletContext().setAttribute("errorPassword", passwordAllowed);
-			response.sendRedirect(request.getContextPath() + "/inscription");
+			response.sendRedirect(request.getContextPath() + "/profilUtilisateur");
 		} else {
 			passwordAllowed = true;
 			this.getServletContext().setAttribute("errorPassword", passwordAllowed);
-			response.sendRedirect(request.getContextPath() + "/inscription");
+			response.sendRedirect(request.getContextPath() + "/profilUtilisateur");
 		}
 	}
 

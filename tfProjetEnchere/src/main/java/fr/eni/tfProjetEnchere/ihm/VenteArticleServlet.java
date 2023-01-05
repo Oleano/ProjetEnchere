@@ -1,4 +1,4 @@
-package Servlets;
+package fr.eni.tfProjetEnchere.ihm;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -13,6 +13,8 @@ import javax.servlet.http.HttpSession;
 import fr.eni.tfProjetEnchere.bll.ArticleVenduManager;
 import fr.eni.tfProjetEnchere.bll.BLLException;
 import fr.eni.tfProjetEnchere.bo.ArticleVendu;
+import fr.eni.tfProjetEnchere.bo.Categorie;
+import fr.eni.tfProjetEnchere.bo.Utilisateur;
 import fr.eni.tfProjetEnchere.dal.DALException;
 
 /**
@@ -38,8 +40,8 @@ public class VenteArticleServlet extends HttpServlet {
 				req.getParameter("registerDescription"), LocalDate.parse(req.getParameter("registerDateDebut")),
 				LocalDate.parse(req.getParameter("registerDateFin")),
 				Integer.parseInt(req.getParameter("registerMisaAPrix")),
-				Integer.parseInt(req.getParameter("registerNoUtilisateur")),
-				Integer.parseInt(req.getParameter("registerCategorie"))
+				(Utilisateur)(req.getSession().getAttribute("user")),
+				(Categorie)(req.getSession().getAttribute("registerCategorie"))
 
 		);
 

@@ -52,14 +52,14 @@
                 <div class="d-flex align-items-center">
                     <ul class="navbar-nav me-3 mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link" href="<%=request.getContextPath()%>">Encheres</a>
+                            <a class="nav-link" href="<%=request.getContextPath()%>">Enchères</a>
                         </li>
                         <c:if test="${isAllowed}">
                         <li class="nav-item">
-                            <a class="nav-link" href="${pageContext.request.contextPath}/venteArticleServlet">Vendre un Article</a>
+                            <a class="nav-link" href="${pageContext.request.contextPath}/VenteArticleServlet">Vendre un Article</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="${pageContext.request.contextPath}/profilServlet">Mon Profil</a>
+                            <a class="nav-link" href="${pageContext.request.contextPath}/ProfilUtilisateurServlet">Mon Profil</a>
                         </li>
                     </ul>
                 </div>
@@ -70,7 +70,7 @@
                         <a href="${pageContext.request.contextPath}/connexion"><button type="button" class="btn btn-primary me-3 shadow-2">CREER UN COMPTE</button></a>
                     </c:if>
                     <c:if test="${isAllowed}">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/profilServlet"><button type="button" class="btn btn-outline-success me-3 shadow-2">${user.pseudo}, ${user.credit} Crédits</button></a>
+                        <a class="nav-link" href="${pageContext.request.contextPath}/profilServlet"><button type="button" class="btn btn-outline-success me-3 shadow-2">${userPseudo.pseudo}, ${userPseudo.credit} Crédits</button></a>
                         <a href="${pageContext.request.contextPath}/connexion?action=deconnexion"><button type="button" class="btn btn-warning me-3 shadow-2">DECONNEXION</button></a>
                     </c:if>
                 </div>
@@ -93,7 +93,7 @@
             <div class="row">
                 <div class="col-12 col-sm-12 col-md-5 offset-md-1 mb-4">
                     <div class="card">
-                        <img src="${pageContext.request.contextPath}/${article.urlPhoto}" class="card-img-top" width="100%">
+                        
                         <div class="card-body pt-0 px-0">
                             <hr class="mt-2 mx-3">
                             <div class="d-flex flex-row justify-content-between px-3 pb-2">
@@ -105,10 +105,10 @@
 
                         <div class="col-12 col-sm-12 col-md-6">
                             <div class="card w-responsive">
-                                <button type="button" class="btn btn-secondary shadow-1" disabled><h4 class="text-center pt-2">PRIX DE DÉPART : ${article.prixInitial} POINTS</h4></button>
+                                <button type="button" class="btn btn-secondary shadow-1" disabled><h4 class="text-center pt-2">PRIX DE DÉPART : ${article.misAPrix} POINTS</h4></button>
                                 <div class="card-body pt-0 px-0">
                                     <div class="d-flex flex-row justify-content-between mb-0 px-3 mt-2">
-                                        <small class="text-muted mt-1">FIN DE L'ENCHÈRE <strong>${article.dateFinEncheres}</strong></small>
+                                        <small class="text-muted mt-1">FIN DE L'ENCHÈRE <strong>${article.finEnchere}</strong></small>
                                         <small class="text-muted mt-1 pseudoUtilisateur">VENDU PAR : ${userPseudo.pseudo}</small>
                                     </div>
                                     <hr class="mt-2 mx-3">
@@ -118,7 +118,7 @@
                                         </div>
                                             <button type="button" class="btn btn-success btnNewPrice shadow-1 mb-2" disabled>
                                                 <c:if test="${prixVente==null}">
-                                                <h6 class="text-center pt-1">DERNIER PRIX :<br> ${article.prixInitial} POINTS</h6>
+                                                <h6 class="text-center pt-1">DERNIER PRIX :<br> ${article.misAPrix} POINTS</h6>
                                                 </c:if>
                                                 <c:if test="${prixVente!=null}">
                                                 <h6 class="text-center pt-1">DERNIER PRIX :<br> ${prixVente} POINTS</h6>
@@ -137,7 +137,7 @@
                                                 <div class="input-group">
                                                     <div class="input-group-text">POINTS</div>
                                                     <c:if test="${prixVente==null}">
-                                                    <input type="number" class="form-control" id="inlineFormInputGroupUsername" name="creditEnchere" placeholder="${article.prixInitial}" min="${article.prixInitial}" step="10" />
+                                                    <input type="number" class="form-control" id="inlineFormInputGroupUsername" name="creditEnchere" placeholder="${article.misAPrix}" min="${article.misAPrix}" step="10" />
                                                     </c:if>
                                                     <c:if test="${prixVente!=null}">
                                                         <input type="number" class="form-control" id="inlineFormInputGroupUsername" name="creditEnchere" placeholder="${prixVente}" min="${prixVente}" step="10" />

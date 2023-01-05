@@ -9,16 +9,18 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import fr.eni.tfProjetEnchere.bo.ArticleVendu;
+import fr.eni.tfProjetEnchere.dal.JDBC.CategorieDAOJDBCImpl;
 import fr.eni.tfProjetEnchere.dal.JDBC.ConnectionProvider;
+import fr.eni.tfProjetEnchere.dal.JDBC.UtilisateurDAOJDBCImpl;
 
 public class TestConnexion {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws DALException, SQLException {
 		Connection cnx = ConnexionDB.getConnection();
         if (cnx != null) {
           System.out.println("Connexion établie avec succès !");
           
-          ArticleVendu articleVendu = new ArticleVendu("Maison", "Maison 3 chambres", LocalDate.of(2022, 01, 02), LocalDate.of(2022, 01, 10), 250000, 300000, 2, 1); 
+          ArticleVendu articleVendu = new ArticleVendu("Maison", "Maison 3 chambres", LocalDate.of(2022, 01, 02), LocalDate.of(2022, 01, 10), 250000, 300000, new UtilisateurDAOJDBCImpl().selectUtilisateurById(1), new CategorieDAOJDBCImpl().selectCategorieByNo(1)); 
   		
   			try  {
   				PreparedStatement pstmt = cnx.prepareStatement("INSERT INTO ARTICLES_VENDUS values (?, ?, ?, ?, ?, ?, ?, ?)", PreparedStatement.RETURN_GENERATED_KEYS);
@@ -28,8 +30,8 @@ public class TestConnexion {
   				pstmt.setDate(4, java.sql.Date.valueOf(articleVendu.getFinEnchere()));
   				pstmt.setInt(5, articleVendu.getMisAPrix());
   				pstmt.setInt(6, articleVendu.getPrixVente());
-  				pstmt.setInt(7, articleVendu.getVendeur());
-  				pstmt.setInt(8, articleVendu.getCategorie());
+  				pstmt.setInt(7, articleVendu.getVendeur().getId());
+  				pstmt.setInt(8, articleVendu.getCategorie().getNoCategorie());
   				
   				pstmt.executeUpdate();
   				ResultSet rs = pstmt.getGeneratedKeys();

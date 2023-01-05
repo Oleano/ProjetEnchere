@@ -9,9 +9,10 @@ import fr.eni.tfProjetEnchere.bo.Enchere;
 import fr.eni.tfProjetEnchere.bo.Utilisateur;
 import fr.eni.tfProjetEnchere.dal.DALException;
 import fr.eni.tfProjetEnchere.dal.DAO.EnchereDAO;
+import fr.eni.tfProjetEnchere.dal.JDBC.EnchereDAOJDBCImpl;
 
 public class EnchereManager {
-	 public static EnchereDAO dao;
+	 public static EnchereDAO dao = new EnchereDAOJDBCImpl();
 
 	    public void createEnchere(Enchere enchere) throws DALException, SQLException {
 	        dao.newEnchere(enchere);

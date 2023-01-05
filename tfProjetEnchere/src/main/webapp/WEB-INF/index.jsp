@@ -60,10 +60,10 @@
                         </li>
                         <c:if test="${isAllowed}">
                         <li class="nav-item">
-                            <a class="nav-link" href="${pageContext.request.contextPath}/venteArticleServlet">Vendre un Article</a>
+                            <a class="nav-link" href="${pageContext.request.contextPath}/VenteArticleServlet">Vendre un Article</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="${pageContext.request.contextPath}/profilServlet">Mon Profil</a>
+                            <a class="nav-link" href="${pageContext.request.contextPath}/ProfilUtilisateurServlet">Mon Profil</a>
                         </li>
                     </ul>
                 </div>
@@ -74,7 +74,7 @@
                         <a href="${pageContext.request.contextPath}/connexion"><button type="button" class="btn btn-primary me-3 shadow-2">CREER UN COMPTE</button></a>
                     </c:if>
                     <c:if test="${isAllowed}">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/profilServlet"><button type="button" class="btn btn-outline-success me-3 shadow-2">${user.pseudo}, ${user.credit} Crédits</button></a>
+                        <a class="nav-link" href="${pageContext.request.contextPath}/profilServlet"><button type="button" class="btn btn-outline-success me-3 shadow-2">${userPseudo.pseudo}, ${userPseudo.credit} Crédits</button></a>
                         <a href="${pageContext.request.contextPath}/connexion?action=deconnexion"><button type="button" class="btn btn-warning me-3 shadow-2">DECONNEXION</button></a>
                     </c:if>
                 </div>
@@ -95,7 +95,7 @@
                         <input type="text" name="articleIn" id="searchBarInput" class="form-control" placeholder="Le nom de l'article contient" onkeyup="searchBar()"/>
                     </div>
 
-                <form method="post" action="${pageContext.request.contextPath}/eniencheres">
+                <form method="post" action="${pageContext.request.contextPath}/thprojetenchere">
                     <div class="row my-4">
                         <div class="col-12 col-md-3 d-flex justify-content-center">
                             <label for="categorySelect" class="mt-1 mb-2">Catégorie</label>
@@ -167,19 +167,19 @@
                     <c:forEach var="element"  items="${article}" >
                             <div class="articleSearch col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mt-3">
                                 <div class="card">
-                                    <img src="${pageContext.request.contextPath}/${element.urlPhoto}" class="card-img-top" width="100%">
+                                    
                                     <div class="card-body pt-0 px-0">
                                         <div class="d-flex flex-row justify-content-between mb-0 px-3">
                                             <small class="text-muted mt-1">PRIX DE DÉPART</small>
-                                            <h6>${element.prixInitial} POINTS</h6>
+                                            <h6>${element.misAPrix} POINTS</h6>
                                         </div>
                                         <hr class="mt-2 mx-3">
                                         <div class="d-flex flex-row justify-content-between px-3 pb-2">
                                             <div class="d-flex flex-column"><span class="text-muted">${element.nomArticle}</span><small class="text-muted">${element.description}</small></div>
                                         </div>
                                         <div class="d-flex flex-row justify-content-between p-3 mid">
-                                            <div class="d-flex flex-column"><small class="text-muted mb-1">VENDEUR</small><div class="d-flex flex-row"><div class="d-flex flex-column ml-1"><h6 class="pseudoUtilisateur ml-1">${element.pseudoUtilisateur}</h6></div></div></div>
-                                            <div class="d-flex flex-column"><small class="text-muted mb-1">FIN DE L'ENCHERE</small><div class="d-flex flex-row"><h6 class="ml-1">${element.dateFinEncheres}</h6></div></div>
+                                            <div class="d-flex flex-column"><small class="text-muted mb-1">VENDEUR</small><div class="d-flex flex-row"><div class="d-flex flex-column ml-1"><h6 class="pseudoUtilisateur ml-1">${element.vendeur.pseudo}</h6></div></div></div>
+                                            <div class="d-flex flex-column"><small class="text-muted mb-1">FIN DE L'ENCHERE</small><div class="d-flex flex-row"><h6 class="ml-1">${element.finEnchere}</h6></div></div>
                                             <div class="d-flex flex-column"><small class="text-muted mb-1">DERNIER PRIX</small><div class="d-flex flex-row"><h6 class="ml-1 dernierPrix">${element.prixVente}</h6></div></div>
                                         </div>
                                         <div class="mx-3 mt-2 mb-2"><a href="<%=request.getContextPath()%>/articleDetail?action=getDetail&noArticle=${element.noArticle}"><button type="button" class="btn btn-outline-danger btn-block"><small>DETAIL DE L'ARTICLE</small></button></a></div>

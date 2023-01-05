@@ -119,7 +119,7 @@
                                 </form>
                             </div>
                             <div class="tab-pane fade" id="pills-register" role="tabpanel" aria-labelledby="tab-register">
-                                <form action="${pageContext.request.contextPath}/inscription" method="post">
+                                <form action="${pageContext.request.contextPath}/profilUtilisateur" method="post">
                                     <!-- Username input -->
                                     <div class="form-outline mb-3">
                                         <input type="hidden" name="idUser" value=""/>

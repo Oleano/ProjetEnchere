@@ -1,4 +1,4 @@
-package Servlets;
+package fr.eni.tfProjetEnchere.ihm;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -28,13 +28,14 @@ public class EnchereServlet extends HttpServlet {
 	private CategorieManager categoriesManager;
 	private EnchereManager enchereManager;
 
+	HttpSession session;
 	public EnchereServlet() {
 		articleVenduManager = new ArticleVenduManager();
 		categoriesManager = new CategorieManager();
 		enchereManager = new EnchereManager();
 	}
 
-	HttpSession session;
+	
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		try {

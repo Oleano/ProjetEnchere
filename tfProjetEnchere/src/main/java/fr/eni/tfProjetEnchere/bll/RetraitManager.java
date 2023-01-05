@@ -5,9 +5,10 @@ import java.sql.SQLException;
 import fr.eni.tfProjetEnchere.bo.Retrait;
 import fr.eni.tfProjetEnchere.dal.DALException;
 import fr.eni.tfProjetEnchere.dal.DAO.RetraitDAO;
+import fr.eni.tfProjetEnchere.dal.JDBC.RetraitDAOJDBCImpl;
 
 public class RetraitManager {
-	 private static RetraitDAO dao;
+	 private static RetraitDAO dao = new RetraitDAOJDBCImpl();
 
 	    public void createRetrait(Retrait retrait) throws DALException, BLLException, SQLException {
 	        BLLException bllException = validateRetrait(retrait);

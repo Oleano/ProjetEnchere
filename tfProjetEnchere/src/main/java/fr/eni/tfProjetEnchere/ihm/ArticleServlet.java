@@ -1,4 +1,4 @@
-package Servlets;
+package fr.eni.tfProjetEnchere.ihm;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -88,7 +88,7 @@ public class ArticleServlet extends HttpServlet {
 		Integer credit = Integer.parseInt(req.getParameter("creditEnchere"));
 		try {
 			enchere = new Enchere(articleVendu.getFinEnchere(), credit, articleVendu.getNoArticle(),
-					articleVendu.getVendeur());
+					articleVendu.getVendeur().getId());
 			articleVendu = articleVenduManager.getArticleById(Integer.parseInt(req.getParameter("noArticle")));
 			articleVendu = new ArticleVendu(Integer.parseInt(req.getParameter("noArticle")),
 					articleVendu.getNomArticle(), articleVendu.getDescription(), articleVendu.getDebutEnchere(),

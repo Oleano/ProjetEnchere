@@ -15,7 +15,7 @@ import java.util.Date;
 import java.util.List;
 
 public class ArticleVenduManager {
-	private static ArticleDAOJDBCImpl dao;
+	private static ArticleDAOJDBCImpl dao = new ArticleDAOJDBCImpl();
 
 	public static void createArticleVendu(ArticleVendu articleVendu) throws BLLException, DALException {
 		BLLException bllException = validateArticleVendu(articleVendu);
