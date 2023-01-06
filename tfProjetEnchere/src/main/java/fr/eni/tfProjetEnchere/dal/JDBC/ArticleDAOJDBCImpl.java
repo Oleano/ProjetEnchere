@@ -20,7 +20,7 @@ public class ArticleDAOJDBCImpl implements ArticleDAO {
 	private static final String SELECT_ALL_BY_UTILISATEURS = "SELECT * FROM ARTICLES_VENDUS WHERE no_utilisateur = ?";
 	private static final String NEW_ARTICLE = "INSERT INTO ARTICLES_VENDUS values (?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String MODIFY_ARTICLE = "UPDATE ARTICLES_VENDUS SET nom_article = ?, description = ?, date_debut_enchere = ?, date_fin_enchere = ?, prix_initial = ?, prix_vente = ?, no_utilisateur = ?, no_categorie = ? WHERE no_article = ?";
-	private static final String DELETE_ARTICLE = "DELETE FROM ARTICLE_VENDUS WHERE no_article = ?";
+	private static final String DELETE_ARTICLE = "DELETE FROM ARTICLES_VENDUS WHERE no_article = ?";
 
 	@Override
 	public List<ArticleVendu> selectAllArticle() throws DALException, SQLException {
@@ -74,7 +74,7 @@ public class ArticleDAOJDBCImpl implements ArticleDAO {
 		List<ArticleVendu> listeArticlesVendus = new ArrayList<ArticleVendu>();
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement pstmt = cnx.prepareStatement(SELECT_BY_NAME);
-			pstmt.setString(2, filtreNom);
+			pstmt.setString(1, filtreNom);
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
 				listeArticlesVendus.add(new ArticleVendu(rs.getInt("no_article"), rs.getString("nom_article"),
@@ -97,7 +97,7 @@ public class ArticleDAOJDBCImpl implements ArticleDAO {
 		List<ArticleVendu> listeArticlesVendus = new ArrayList<ArticleVendu>();
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement pstmt = cnx.prepareStatement(SELECT_BY_CATEGORIE);
-			pstmt.setInt(9, filtreIdCategorie);
+			pstmt.setInt(1, filtreIdCategorie);
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
 				listeArticlesVendus.add(new ArticleVendu(rs.getInt("no_article"), rs.getString("nom_article"),
@@ -120,7 +120,7 @@ public class ArticleDAOJDBCImpl implements ArticleDAO {
 		List<ArticleVendu> listeArticlesVendus = new ArrayList<ArticleVendu>();
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement pstmt = cnx.prepareStatement(SELECT_ALL_BY_UTILISATEURS);
-			pstmt.setInt(8, idUtilisateur);
+			pstmt.setInt(1, idUtilisateur);
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
 				listeArticlesVendus.add(new ArticleVendu(rs.getInt("no_article"), rs.getString("nom_article"),
@@ -166,14 +166,14 @@ public class ArticleDAOJDBCImpl implements ArticleDAO {
 	public void modifyArticle(ArticleVendu noArticle) throws DALException, SQLException {
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement pstmt = cnx.prepareStatement(MODIFY_ARTICLE);
-			pstmt.setString(2, noArticle.getNomArticle());
-			pstmt.setString(3, noArticle.getDescription());
-			pstmt.setDate(4, java.sql.Date.valueOf(noArticle.getDebutEnchere()));
-			pstmt.setDate(5, java.sql.Date.valueOf(noArticle.getFinEnchere()));
-			pstmt.setInt(6, noArticle.getMisAPrix());
-			pstmt.setInt(7, noArticle.getPrixVente());
-			pstmt.setInt(8, noArticle.getVendeur().getId());
-			pstmt.setInt(9, noArticle.getCategorie().getNoCategorie());
+			pstmt.setString(1, noArticle.getNomArticle());
+			pstmt.setString(2, noArticle.getDescription());
+			pstmt.setDate(3, java.sql.Date.valueOf(noArticle.getDebutEnchere()));
+			pstmt.setDate(4, java.sql.Date.valueOf(noArticle.getFinEnchere()));
+			pstmt.setInt(5, noArticle.getMisAPrix());
+			pstmt.setInt(6, noArticle.getPrixVente());
+			pstmt.setInt(7, noArticle.getVendeur().getId());
+			pstmt.setInt(8, noArticle.getCategorie().getNoCategorie());
 
 			pstmt.executeUpdate();
 			cnx.close();

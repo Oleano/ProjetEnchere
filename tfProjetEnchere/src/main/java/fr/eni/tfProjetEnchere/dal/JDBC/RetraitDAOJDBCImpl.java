@@ -12,10 +12,10 @@ import fr.eni.tfProjetEnchere.dal.DAO.RetraitDAO;
 
 public class RetraitDAOJDBCImpl implements RetraitDAO {
 	private static final String SELECT_ALL_RETRAIT = "SELECT * FROM RETRAITS";
-	private static final String SELECT_RETRAIT_BY_ID = "SELECT * FROM RETRAIT WHERE no_article = ?";
-	private static final String NEW_RETRAIT = "INSERT INTO RETRAIT VALUES(?, ?, ?, ?)";
-	private static final String MODIFY_RETRAIT = "UPDATE RETRAIT SET no_article = ?, rue = ?, code_postal = ?, ville = ?";
-	private static final String DELETE_RETRAIT = "DELETE FROM RETRAIT WHERE no_article = ?";
+	private static final String SELECT_RETRAIT_BY_ID = "SELECT * FROM RETRAITS WHERE no_article = ?";
+	private static final String NEW_RETRAIT = "INSERT INTO RETRAITS VALUES(?, ?, ?, ?)";
+	private static final String MODIFY_RETRAIT = "UPDATE RETRAITS SET no_article = ?, rue = ?, code_postal = ?, ville = ?";
+	private static final String DELETE_RETRAIT = "DELETE FROM RETRAITS WHERE no_article = ?";
 
 	@Override
 	public List<Retrait> selectAllRetrait() throws DALException, SQLException {

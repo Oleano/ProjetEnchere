@@ -64,13 +64,13 @@
 					<!-- Left links -->
 					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 						<li class="nav-item"><a class="nav-link"
-							href="<%=request.getContextPath()%>">PROJET ENCHERES</a></li>
+							href="<%=request.getContextPath()+"/EnchereServlet"%>">PROJET ENCHERES</a></li>
 					</ul>
 					<!-- Left links -->
 					<div class="d-flex align-items-center">
 						<ul class="navbar-nav me-3 mb-2 mb-lg-0">
 							<li class="nav-item"><a class="nav-link"
-								href="<%=request.getContextPath()%>">Enchères</a></li>
+								href="<%=request.getContextPath()+"/EnchereServlet"%>">Enchères</a></li>
 							<c:if test="${isAllowed}">
 								<li class="nav-item"><a class="nav-link"
 									href="${pageContext.request.contextPath}/VenteArticleServlet">Vendre
@@ -91,9 +91,9 @@
 						</c:if>
 						<c:if test="${isAllowed}">
 							<a class="nav-link"
-								href="${pageContext.request.contextPath}/profilServlet"><button
-									type="button" class="btn btn-outline-success me-3 shadow-2">${userPseudo.pseudo},
-									${userPseudo.credit} Crédits</button></a>
+								href="${pageContext.request.contextPath}/profilUtilisateurServlet"><button
+									type="button" class="btn btn-outline-success me-3 shadow-2">${user.pseudo},
+									${user.credit} Crédits</button></a>
 							<a
 								href="${pageContext.request.contextPath}/connexion?action=deconnexion"><button
 									type="button" class="btn btn-warning me-3 shadow-2">DECONNEXION</button></a>
@@ -143,7 +143,7 @@
 									class="d-flex flex-row justify-content-between mb-0 px-3 mt-2">
 									<small class="text-muted mt-1">FIN DE L'ENCHÈRE <strong>${article.finEnchere}</strong></small>
 									<small class="text-muted mt-1 pseudoUtilisateur">VENDU
-										PAR : ${userPseudo.pseudo}</small>
+										PAR : ${user.pseudo}</small>
 								</div>
 								<hr class="mt-2 mx-3">
 								<div class="d-flex flex-row justify-content-between px-3 pb-2">
@@ -168,7 +168,7 @@
 											</h6>
 										</c:if>
 										<small class="pseudoUtilisateur">PAR
-											${userPseudo.pseudo}</small>
+											${user.pseudo}</small>
 									</button>
 								</div>
 

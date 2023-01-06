@@ -76,7 +76,7 @@ public class UtilisateurDAOJDBCImpl implements UtilisateurDAO {
 		Utilisateur user = new Utilisateur();
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement pstmt = cnx.prepareStatement(SELECT_UTILISATEUR_BY_PSEUDO);
-			pstmt.setString(2, pseudo);
+			pstmt.setString(1, pseudo);
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
 				user.setId(rs.getInt("no_utilisateur"));
@@ -104,17 +104,17 @@ public class UtilisateurDAOJDBCImpl implements UtilisateurDAO {
 
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement pstmt = cnx.prepareStatement(NEW_UTILISATEUR, PreparedStatement.RETURN_GENERATED_KEYS);
-			pstmt.setString(1, utilisateur.getPseudo());
-			pstmt.setString(2, utilisateur.getNom());
-			pstmt.setString(3, utilisateur.getPrenom());
-			pstmt.setString(4, utilisateur.getEmail());
-			pstmt.setString(5, utilisateur.getTelephone());
-			pstmt.setString(6, utilisateur.getRue());
-			pstmt.setString(7, utilisateur.getCodePostal());
-			pstmt.setString(8, utilisateur.getVille());
-			pstmt.setString(9, utilisateur.getMotDePasse());
-			pstmt.setInt(10, utilisateur.getCredit());
-			pstmt.setBoolean(11, utilisateur.isAdministrateur());
+			pstmt.setString(2, utilisateur.getPseudo());
+			pstmt.setString(3, utilisateur.getNom());
+			pstmt.setString(4, utilisateur.getPrenom());
+			pstmt.setString(5, utilisateur.getEmail());
+			pstmt.setString(6, utilisateur.getTelephone());
+			pstmt.setString(7, utilisateur.getRue());
+			pstmt.setString(8, utilisateur.getCodePostal());
+			pstmt.setString(9, utilisateur.getVille());
+			pstmt.setString(10, utilisateur.getMotDePasse());
+			pstmt.setInt(11, utilisateur.getCredit());
+			pstmt.setBoolean(12, utilisateur.isAdministrateur());
 
 			pstmt.executeUpdate();
 			ResultSet rs = pstmt.getGeneratedKeys();
@@ -204,7 +204,7 @@ public class UtilisateurDAOJDBCImpl implements UtilisateurDAO {
 		Utilisateur user = new Utilisateur();
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement pstmt = cnx.prepareStatement(SELECT_UTILISATEUR_BY_LOGIN_MDP_OUBLIE);
-			pstmt.setString(5, email);
+			pstmt.setString(1, email);
 
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {

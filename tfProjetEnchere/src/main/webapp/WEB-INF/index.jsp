@@ -91,9 +91,9 @@
 						</c:if>
 						<c:if test="${isAllowed}">
 							<a class="nav-link"
-								href="${pageContext.request.contextPath}/profilServlet"><button
-									type="button" class="btn btn-outline-success me-3 shadow-2">${userPseudo.pseudo},
-									${userPseudo.credit} Crédits</button></a>
+								href="${pageContext.request.contextPath}/profilUtilisateurServlet"><button
+									type="button" class="btn btn-outline-success me-3 shadow-2">${user.pseudo},
+									${user.credit} Crédits</button></a>
 							<a
 								href="${pageContext.request.contextPath}/connexion?action=deconnexion"><button
 									type="button" class="btn btn-warning me-3 shadow-2">DECONNEXION</button></a>
@@ -120,7 +120,7 @@
 				</div>
 
 				<form method="post"
-					action="${pageContext.request.contextPath}/tfProjetEnchere">
+					action="${pageContext.request.contextPath}/EnchereServlet">
 					<div class="row my-4">
 						<div class="col-12 col-md-3 d-flex justify-content-center">
 							<label for="categorySelect" class="mt-1 mb-2">Catégorie</label>

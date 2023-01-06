@@ -70,13 +70,12 @@ public class ArticleServlet extends HttpServlet {
 			articleVendu = articleVenduManager.getArticleById(id);
 			enchere = enchereManager.bestEnchere(id);
 			retrait = retraitManager.selectRetraitById(id);
-			user = utilisateursManager.selectUtilisateurById(id);
+			user = utilisateursManager.selectUtilisateurById(articleVendu.getVendeur().getId());
 			session = req.getSession();
 			session.setAttribute("retrait", retrait);
 			session.setAttribute("article", articleVendu);
 			session.setAttribute("prixVente", enchere);
-			session.setAttribute("userPseudo", user);
-
+			session.setAttribute("user", user);
 			(req.getRequestDispatcher("/WEB-INF/articleDetail.jsp")).forward(req, resp);
 		} catch (BLLException e) {
 			e.printStackTrace();
@@ -91,12 +90,12 @@ public class ArticleServlet extends HttpServlet {
 			enchere = new Enchere(articleVendu.getFinEnchere(), credit, articleVendu.getNoArticle(),
 					articleVendu.getVendeur().getId());
 			articleVendu = articleVenduManager.getArticleById(Integer.parseInt(req.getParameter("noArticle")));
-			articleVendu = new ArticleVendu(Integer.parseInt(req.getParameter("noArticle")),
-					articleVendu.getNomArticle(), articleVendu.getDescription(), articleVendu.getDebutEnchere(),
-					articleVendu.getFinEnchere(), articleVendu.getMisAPrix(), enchere.getMontantEnchere(),
-					articleVendu.getVendeur(), articleVendu.getNoArticle());
+		//	articleVendu = new ArticleVendu(Integer.parseInt(req.getParameter("noArticle")),
+			//		articleVendu.getNomArticle(), articleVendu.getDescription(), articleVendu.getDebutEnchere(),
+				//	articleVendu.getFinEnchere(), articleVendu.getMisAPrix(), enchere.getMontantEnchere(),
+					//articleVendu.getVendeur(), articleVendu.getNoArticle());
 			enchereManager.createEnchere(enchere);
-			articleVenduManager.updateArticle(articleVendu);
+		// articleVenduManager.updateArticle(articleVendu);
 			session.setAttribute("prixVente", articleVendu.getPrixVente());
 			resp.sendRedirect(req.getContextPath() + "/articleDetail");
 		} catch (BLLException | NumberFormatException | DALException | SQLException e) {

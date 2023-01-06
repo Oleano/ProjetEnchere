@@ -69,6 +69,7 @@ public class ProfilUtilisateurServlet extends HttpServlet {
 		session = req.getSession();
 
 		try {
+			
 			if (!user.getMotDePasse().equals(req.getParameter("profilPassword"))
 					|| !req.getParameter("profilNewPassword").equals(req.getParameter("profilPasswordConf"))) {
 				System.out.println(req.getParameter("profilPassword"));

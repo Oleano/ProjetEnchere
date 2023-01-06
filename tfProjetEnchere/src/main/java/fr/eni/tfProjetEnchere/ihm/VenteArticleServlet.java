@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import fr.eni.tfProjetEnchere.bll.ArticleVenduManager;
 import fr.eni.tfProjetEnchere.bll.BLLException;
 import fr.eni.tfProjetEnchere.bll.CategorieManager;
+import fr.eni.tfProjetEnchere.bll.UtilisateurManager;
 import fr.eni.tfProjetEnchere.bo.ArticleVendu;
 import fr.eni.tfProjetEnchere.bo.Categorie;
 import fr.eni.tfProjetEnchere.bo.Utilisateur;
@@ -44,11 +45,14 @@ public class VenteArticleServlet extends HttpServlet {
 		request.getRequestDispatcher("/WEB-INF/nouvelleVente.jsp").forward(request, response);
 	}
 
+	@SuppressWarnings("static-access")
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		Categorie cat = null;
+		Utilisateur user = null;
 		try {
 			 cat = new CategorieManager().getCategorieByNo(Integer.parseInt(req.getParameter("registerCategorie")));
+			// user = new UtilisateurManager().selectUtilisateurById(Integer.parseInt(req.getParameter("user")));
 		} catch (NumberFormatException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

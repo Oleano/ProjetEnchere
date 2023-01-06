@@ -15,7 +15,7 @@ public class EnchereDAOJDBCImpl implements EnchereDAO {
 	private static final String SELECT_ALL_ENCHERE = "SELECT * FROM ENCHERES";
 	private static final String SELECT_MES_ENCHERE = "SELECT * FROM ENCHERES WHERE no_utilisateur";
 	private static final String NEW_ENCHERE = "INSERT INTO ENCHERES VALUES(?, ?, ?, ?)";
-	private static final String BEST_ENCHERE = "SELECT no_article, MAX(montant_enchere) AS best_enchere FROM ENCHERES WHERE no_article = ? GROUP BY no_article DESC";
+	private static final String BEST_ENCHERE = "SELECT no_article, MAX(montant_enchere) AS best_enchere FROM ENCHERES WHERE no_article = ? ORDER BY no_article DESC";
 
 	@Override
 	public List<Enchere> selectAllEncheres() throws DALException, SQLException {
@@ -41,7 +41,7 @@ public class EnchereDAOJDBCImpl implements EnchereDAO {
 		List<Enchere> listeMesEncheres = new ArrayList<Enchere>();
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement pstmt = cnx.prepareStatement(SELECT_MES_ENCHERE);
-			pstmt.setInt(5, idUtilisateur);
+			pstmt.setInt(1, idUtilisateur);
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
 				listeMesEncheres.add(new Enchere(rs.getObject("date_enchere", LocalDate.class),
@@ -60,10 +60,10 @@ public class EnchereDAOJDBCImpl implements EnchereDAO {
 	public void newEnchere(Enchere enchere) throws DALException, SQLException {
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement pstmt = cnx.prepareStatement(NEW_ENCHERE);
-			pstmt.setDate(2, java.sql.Date.valueOf(enchere.getDateEnchere()));
-			pstmt.setInt(3, enchere.getMontantEnchere());
-			pstmt.setInt(4, enchere.getArticleVendu());
-			pstmt.setInt(5, enchere.getEncherisseur());
+			pstmt.setDate(1, java.sql.Date.valueOf(enchere.getDateEnchere()));
+			pstmt.setInt(2, enchere.getMontantEnchere());
+			pstmt.setInt(3, enchere.getArticleVendu());
+			pstmt.setInt(4, enchere.getEncherisseur());
 
 			pstmt.executeUpdate();
 			cnx.close();
@@ -79,7 +79,7 @@ public class EnchereDAOJDBCImpl implements EnchereDAO {
 		Enchere bestEnchere = new Enchere();
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement pstmt = cnx.prepareStatement(BEST_ENCHERE);
-			pstmt.setInt(4, noArticle);
+			pstmt.setInt(1, noArticle);
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
 				bestEnchere.setDateEnchere(rs.getObject("date_enchere", LocalDate.class));

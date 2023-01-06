@@ -10,7 +10,7 @@
 
 <!-- Google Search Meta -->
 <meta name="title" content="ENI - ENCHERES - ED2WM-2210A" />
-<meta name="description" content="Sites Enchères en ligne ENI" />
+<meta name="description" content="Site Enchères en ligne ENI" />
 <meta name="author" content="Virginie, Kenza, Thomas" />
 
 <!-- FavIcons Settings -->
@@ -99,8 +99,8 @@
 						<c:if test="${isAllowed}">
 							<a class="nav-link"
 								href="${pageContext.request.contextPath}/ProfilUtilisateurServlet"><button
-									type="button" class="btn btn-outline-success me-3 shadow-2">${userPseudo.pseudo},
-									${userPseudo.credit} Crédits</button></a>
+									type="button" class="btn btn-outline-success me-3 shadow-2">${user.pseudo},
+									${user.credit} Crédits</button></a>
 							<a
 								href="${pageContext.request.contextPath}/connexion?action=deconnexion"><button
 									type="button" class="btn btn-warning me-3 shadow-2">DECONNEXION</button></a>
@@ -132,19 +132,19 @@
 				<div class="col-12 col-lg-10">
 					<form class="d-flex flex-column align-items-center" method="post"
 						action="${pageContext.request.contextPath}/ProfilUtilisateurServlet">
-						<input type="hidden" name="noUtilisateur" value="${userPseudo.id}" />
+						<input type="hidden" name="noUtilisateur" value="${user.id}" />
 						<!-- Username input -->
 						<div
 							class="d-flex col-12 col-sm-11 col-md-11 justify-content-between gap-2">
 							<div class="form-outline mb-4">
 								<input type="text" name="profilPseudo" id="registerUsername"
-									class="form-control" value="${userPseudo.pseudo}" /> <label
+									class="form-control" value="${user.pseudo}" /> <label
 									class="form-label" for="registerUsername">Pseudo</label>
 							</div>
 							<!-- Name input -->
 							<div class="form-outline mb-4 justify-content-between">
 								<input type="text" name="profilNom" id="registerName"
-									class="form-control" value="${userPseudo.nom}" /> <label
+									class="form-control" value="${user.nom}" /> <label
 									class="form-label" for="registerName">Nom</label>
 							</div>
 						</div>
@@ -152,13 +152,13 @@
 						<div class="col-12 col-sm-11 col-md-11">
 							<div class="form-outline mb-4">
 								<input type="text" name="profilPrenom" id="registerSurname"
-									class="form-control" value="${userPseudo.prenom}" /> <label
+									class="form-control" value="${user.prenom}" /> <label
 									class="form-label" for="registerSurname">Prénom</label>
 							</div>
 							<!-- E-Mail input -->
 							<div class="form-outline mb-4">
 								<input type="email" name="profilEmail" id="registerEmail"
-									class="form-control" value="${userPseudo.email}" /> <label
+									class="form-control" value="${user.email}" /> <label
 									class="form-label" for="registerEmail">E-mail</label>
 							</div>
 						</div>
@@ -166,13 +166,13 @@
 						<div class="col-12 col-sm-11 col-md-11">
 							<div class="form-outline mb-4">
 								<input type="text" name="profilTelephone" id="registerTel"
-									class="form-control" value="${userPseudo.telephone}" /> <label
+									class="form-control" value="${user.telephone}" /> <label
 									class="form-label" for="registerTel">Téléphone</label>
 							</div>
 							<!-- Rue input -->
 							<div class="form-outline mb-4">
 								<input type="text" name="profilRue" id="registerRue"
-									class="form-control" value="${userPseudo.rue}" /> <label
+									class="form-control" value="${user.rue}" /> <label
 									class="form-label" for="registerRue">Rue</label>
 							</div>
 						</div>
@@ -182,13 +182,13 @@
 							<div class="form-outline mb-4">
 								<input type="text" name="profilCodePostal"
 									id="registerPostalCode" class="form-control"
-									value="${userPseudo.codePostal}" /> <label class="form-label"
+									value="${user.codePostal}" /> <label class="form-label"
 									for="registerPostalCode">Code Postal</label>
 							</div>
 							<!-- Ville input -->
 							<div class="form-outline mb-4">
 								<input type="text" name="profilVille" id="registerVille"
-									class="form-control" value="${userPseudo.ville}" /> <label
+									class="form-control" value="${user.ville}" /> <label
 									class="form-label" for="registerVille">Ville</label>
 							</div>
 						</div>
@@ -215,9 +215,9 @@
 						</div>
 						<div class="text-center mb-2">
 							<button type="button" class="btn btn-light btn mb-3 shadow-1">Crédits
-								: ${userPseudo.credit}</button>
+								: ${user.credit}</button>
 							<input type="hidden" name="profilCredit"
-								value="${userPseudo.credit}" />
+								value="${user.credit}" />
 						</div>
 						<!-- Bouton Input -->
 						<div
@@ -231,7 +231,7 @@
 							<div class="col-12 col-sm-8 col-lg-9 text-center">
 								<div class="form-outline">
 									<a
-										href="${pageContext.request.contextPath}/ProfilUtilisateurServlet?action=supprimer&noUtilisateur=${userPseudo.id}"><button
+										href="${pageContext.request.contextPath}/ProfilUtilisateurServlet?action=supprimer&noUtilisateur=${user.id}"><button
 											type="button"
 											class="btn btn-outline-danger btn-block shadow-1">SUPPRIMER</button></a>
 								</div>

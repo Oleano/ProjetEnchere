@@ -106,7 +106,7 @@ public class CategorieDAOJDBCImpl implements CategorieDAO {
 		List<Categorie> listeCategorie = new ArrayList<Categorie>();
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement pstmt = cnx.prepareStatement(SELECT_CATEGORIE_BY_NAME);
-			pstmt.setString(2, libelle);
+			pstmt.setString(1, libelle);
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
 				listeCategorie.add(new Categorie(rs.getInt("no_categorie"), rs.getString("libelle")));

@@ -93,8 +93,8 @@
 						<c:if test="${isAllowed}">
 							<a class="nav-link"
 								href="${pageContext.request.contextPath}/ProfilUtilisateurServlet"><button
-									type="button" class="btn btn-outline-success me-3 shadow-2">${userPseudo.pseudo},
-									${userPseudo.credit} Crédits</button></a>
+									type="button" class="btn btn-outline-success me-3 shadow-2">${user.pseudo},
+									${user.credit} Crédits</button></a>
 							<a
 								href="${pageContext.request.contextPath}/connexion?action=deconnexion"><button
 									type="button" class="btn btn-warning me-3 shadow-2">DECONNEXION</button></a>
@@ -125,7 +125,7 @@
 
 						<div class="col-12">
 							<input type="hidden" name="registerNoUtilisateur"
-								value="${userPseudo.id}">
+								value="${user.id}">
 
 							<div class="form-outline mb-3">
 								<input type="text" id="formNomArticle" name="registerArticle"
@@ -182,7 +182,7 @@
 
 							<div class="form-outline mb-3">
 								<input type="text" id="formRetraitRue" name="registerRetraitRue"
-									class="form-control" value="${userPseudo.rue}" disabled /> <label
+									class="form-control" value="${user.rue}" disabled /> <label
 									class="form-label" name="registerRetraitRue"
 									for="formRetraitRue">Rue</label>
 							</div>
@@ -191,7 +191,7 @@
 								<div class="form-outline mb-3">
 									<input type="number" id="formRetraitCodePostal"
 										name="registerRetraitCodePostal" class="form-control"
-										value="${userPseudo.codePostal}" disabled /> <label
+										value="${user.codePostal}" disabled /> <label
 										class="form-label" name="registerRetraitCodePostal"
 										for="formRetraitCodePostal">Code Postal</label>
 								</div>
@@ -199,7 +199,7 @@
 								<div class="form-outline mb-3">
 									<input type="text" id="formRetraitVille"
 										name="registerRetraitVille" class="form-control"
-										value="${userPseudo.ville}" disabled /> <label
+										value="${user.ville}" disabled /> <label
 										class="form-label" name="registerRetraitVille"
 										for="formRetraitVille">Ville</label>
 								</div>
